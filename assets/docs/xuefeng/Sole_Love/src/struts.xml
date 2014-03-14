@@ -13,27 +13,32 @@
 	<package name="default" namespace="/" extends="struts-default">
 
 		<default-action-ref name="index" />
+		<!-- 产品列表 -->
 		<action name="products" class="productsAction" method="findProductInfo">
 			<result name="success">
 				MyJsp.jsp
 			</result>
 		</action>
+		
+		<!-- 用户信息 -->
 		<action name="index" class="usersAction" method="findUserInfo">
 			<result name="success">index.jsp</result>
-			<result name="input">MyJsp.jsp</result>
+			<result name="error">MyJsp.jsp</result>
 		</action>
-
+		
+		<!-- 用户注册 -->
 		<action name="register" class="usersAction" method="addUserInfo">
 			<result name="success">index.jsp</result>
 			<result name="input">MyJsp.jsp</result>
 		</action>
-
+		
+		<!-- 验证手机或者邮箱是否存在 -->
 		<action name="check_email_or_mobile_existed" class="loginAction"
 			method="check_email_or_mobile_existed">
 			<result name="success">index.jsp</result>
 			<result name="input">MyJsp.jsp</result>
 		</action>
-
+		
 		<!-- 验证码 -->
 		<action name="identifie" class="loginAction" method="identifieCode">
 			<result type="stream">
@@ -42,11 +47,69 @@
 			</result>
 		</action>
 		
-<action name="greetings" class="greetingsAction" method="findGreetingInfo">
+		<!-- 	login -->
+		<action name="login" class="loginAction" method="login">
 			<result name="success">index.jsp</result>
 			<result name="input">MyJsp.jsp</result>
 		</action>
 		
+		<!-- 	logout -->
+		<action name="logout" class="loginAction" method="logOut">
+			<result name="success">index.jsp</result>
+			<result name="input">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	取得当前用户的配送地址列表-->
+		<action name="addresses" class="addressAction" method="findAddInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	添加配送地址-->
+		<action name="add_address" class="addressAction" method="addAddressInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	修改配送地址-->
+		<action name="update_address" class="addressAction" method="updateAddressInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	删除配送地址-->
+		<action name="del_address" class="addressAction" method="delAddressInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	提交订单-->
+		<action name="submit_order" class="ordersAction" method="addOrdersInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	用户所用订单-->
+		<action name="all_order" class="ordersAction" method="findAllOrdersInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	配送方式列表-->
+		<action name="expresses" class="expressesAction" method="findExpressInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		<!-- 	取得当前user使用过的祝福列表 -->
+		<action name="greetings" class="greetingsAction" method="findGreetingInfo">
+			<result name="success">index.jsp</result>
+			<result name="input">MyJsp.jsp</result>
+		</action>
+		<!-- 	创建祝福-->
+		<action name="create_greeting" class="greetingsAction" method="addGreetingInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
 	</package>
 
 </struts>

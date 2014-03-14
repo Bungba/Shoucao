@@ -23,11 +23,15 @@ public class UsersService {
 		return usersDao.addUserInfo(users);
 	}
 
-	public boolean check_email_or_mobile_existed(String mobile,String email){
+	public boolean check_email_or_mobile_existed(String mobile, String email) {
 		return usersDao.check_email_or_mobile_existed(mobile, email);
 	}
-	
+
 	public Users login(String mobile, String email, String password) {
 		return usersDao.login(mobile, email, password);
+	}
+
+	public Users updateUserInfo(int userid, String tel, String address) {
+		return usersDao.updateUserInfo(userid, tel, address);
 	}
 }

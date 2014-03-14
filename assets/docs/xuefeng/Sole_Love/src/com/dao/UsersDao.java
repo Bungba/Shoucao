@@ -26,7 +26,7 @@ public class UsersDao {
 		Session session = sessionFactory.getCurrentSession();// 获得session
 		Query query = session.createQuery("from Users");// 查询Users数据
 		List<Users> list = query.list();
-		System.out.println(list.get(0).getEmail());
+		// System.out.println(list.get(0).getEmail());
 		return list;
 	}
 
@@ -42,8 +42,10 @@ public class UsersDao {
 		}
 		return null;
 	}
+
 	/**
 	 * 验证手机或者邮箱是否存在
+	 * 
 	 * @param mobile
 	 * @param email
 	 * @return
@@ -82,5 +84,25 @@ public class UsersDao {
 			return (Users) query.uniqueResult();
 		}
 		return null;
+	}
+	/**
+	 * 注册首草使者添加用户新信息
+	 * @param userid
+	 * @param tel
+	 * @param address
+	 * @return
+	 */
+	@Transactional
+	public Users updateUserInfo(int userid, String tel, String address) {
+		Session session = sessionFactory.getCurrentSession();
+		Users u = new Users();
+		u.setId(userid);
+		u.setTel(tel);
+		u.setAddress(address);
+		session.update(u);
+		Query query = session.createQuery("from Users where id=?");
+		query.setInteger(0, userid);
+		u = (Users) query.uniqueResult();
+		return u;
 	}
 }

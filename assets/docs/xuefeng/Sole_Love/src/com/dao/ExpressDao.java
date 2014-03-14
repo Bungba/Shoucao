@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
@@ -8,29 +10,24 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.model.Invcodes;
+import com.model.Expresses;
 
 @Repository
-public class InvcodesDao {
+public class ExpressDao {
 
 	@Resource
 	SessionFactory sessionFactory;
 
 	/**
-	 * 查询邀请码是否使用
+	 * 取得快递列表
 	 * 
-	 * @param invcodes
 	 * @return
 	 */
 	@Transactional
-	public boolean findInvcodesInfo(String invcodes) {
+	public List<Expresses> findExpInfo() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Invcodes where code=?");
-		query.setString(0, invcodes);
-		Invcodes invcodes2 = (Invcodes) query.uniqueResult();
-		if (invcodes2.getSid() == 0 && invcodes2.getSid() != null) {
-			return true;
-		}
-		return false;
+		Query query = session.createQuery("from Expresses");
+		List<Expresses> list = query.list();
+		return list;
 	}
 }

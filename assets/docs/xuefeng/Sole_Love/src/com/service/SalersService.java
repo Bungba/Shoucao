@@ -17,4 +17,8 @@ public class SalersService {
 	public Salers findSalersInfo(int userid) {
 		return salersDao.findSalersInfo(userid);
 	}
+
+	public Salers addSalersInfo(int userid, String code, String idcode,String invcodes) {
+		return salersDao.addSalersInfo(userid, code, idcode,invcodes);
+	}
 }

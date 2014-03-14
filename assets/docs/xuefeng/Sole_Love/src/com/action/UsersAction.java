@@ -20,19 +20,21 @@ public class UsersAction {
 	@Resource
 	SalersService salersService;
 
-	int userid;
-
 	/**
 	 * 查询用户信息
 	 * 
 	 * @return
 	 */
 	public String findUsersInfo() {
-		usersService.findUsersInfo();
-		if (userid != 0) {
-			salersService.findSalersInfo(userid);
+
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
+		if (user != null) {
+			usersService.findUsersInfo();
+			salersService.findSalersInfo(user.getId());
+			return "success";
 		}
-		return "success";
+		return "error";
 	}
 
 	/**
@@ -60,30 +62,12 @@ public class UsersAction {
 		return null;
 	}
 
-	/**
-	 * 退出登录
-	 * 
-	 * @return
-	 */
-	public String logOut() {
-		ServletActionContext.getRequest().getSession().removeAttribute("User");// 将session中的用户信息清除
-		return "success";
-	}
-
 	public UsersService getUsersService() {
 		return usersService;
 	}
 
 	public void setUsersService(UsersService usersService) {
 		this.usersService = usersService;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
 	}
 
 	public SalersService getSalersService() {

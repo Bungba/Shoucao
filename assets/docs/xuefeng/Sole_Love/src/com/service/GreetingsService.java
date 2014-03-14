@@ -13,8 +13,13 @@ import com.model.Greetings;
 public class GreetingsService {
 	@Resource
 	GreetingsDao greetingsDao;
-	
-	public List<Greetings> findGreetingsInfo(int userid){
+
+	public List<Greetings> findGreetingsInfo(int userid) {
 		return greetingsDao.findGreetingsInfo(userid);
+	}
+
+	public List<Greetings> addGreetingInfo(int userid, String char_id,
+			String bg_id, String sound) {
+		return greetingsDao.addGreetingInfo(userid, char_id, bg_id, sound);
 	}
 }

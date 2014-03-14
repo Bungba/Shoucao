@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <img src="identifie.action" /> 
-    <form action="greetings.action" method="post">
+    <form action="addresses.action" method="post">
     	<input type="text" name="rand">
     	<input type="submit" value="测试">
     </form>

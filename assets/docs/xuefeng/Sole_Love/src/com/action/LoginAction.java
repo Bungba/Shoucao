@@ -28,9 +28,10 @@ public class LoginAction {
 	String mobile;// 手机号
 	String email;// 邮箱
 	String password;// 密码
-	
+
 	/**
 	 * 验证手机或者邮箱是否存在
+	 * 
 	 * @param mobile
 	 * @param email
 	 * @return
@@ -45,7 +46,7 @@ public class LoginAction {
 	 * 
 	 * @return
 	 */
-	
+
 	public String login() {
 		Users users = null;
 		MD5Util md5 = new MD5Util();
@@ -56,23 +57,42 @@ public class LoginAction {
 			users = usersService.login(null, email, md);
 		}
 		Salers salers = salersService.findSalersInfo(users.getId());// 首草使者信息
-		
+
 		ServletActionContext.getRequest().getSession().setAttribute("User", "");
 		return null;
 	}
-	
+
 	/**
-	 * 验证码
+	 * 退出登录
+	 * 
 	 * @return
 	 */
-	private ByteArrayInputStream inputStream; 
-	public String identifieCode(){
-		RandomNumUtil rdnu=RandomNumUtil.Instance(); 
-		this.setInputStream(rdnu.getImage());//取得带有随机字符串的图片 
-		ServletActionContext.getRequest().getSession().setAttribute("identifie", rdnu.getString());//取得随机字符串放入Session 
+	public String logOut() {
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
+		if (user != null) {
+			ServletActionContext.getRequest().getSession()
+					.removeAttribute("User");// 将session中的用户信息清除
+			return "success";
+		}
+		return "error";
+	}
+
+	/**
+	 * 验证码
+	 * 
+	 * @return
+	 */
+	private ByteArrayInputStream inputStream;
+
+	public String identifieCode() {
+		RandomNumUtil rdnu = RandomNumUtil.Instance();
+		this.setInputStream(rdnu.getImage());// 取得带有随机字符串的图片
+		ServletActionContext.getRequest().getSession()
+				.setAttribute("identifie", rdnu.getString());// 取得随机字符串放入Session
 		return "success";
 	}
-	
+
 	public UsersService getUsersService() {
 		return usersService;
 	}
@@ -120,6 +140,5 @@ public class LoginAction {
 	public void setInputStream(ByteArrayInputStream inputStream) {
 		this.inputStream = inputStream;
 	}
-
 
 }
