@@ -110,6 +110,50 @@
 			<result name="success">index.jsp</result>
 			<result name="error">MyJsp.jsp</result>
 		</action>
+		
+		<!-- 	首草使者信息-->
+		<action name="salerInfo" class="salersAction" method="findSalersInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		<!-- 	查询邀请码是否使用-->
+		<action name="checkInvcodes" class="salersAction" method="findInvcodesInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		<!-- 	注册首草使者-->
+		<action name="registerSaler" class="salersAction" method="addSalersInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	查询站内信-->
+		<action name="message" class="messagesAction" method="findMsgInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		<!-- 	读站内信-->
+		<action name="readMes" class="messagesAction" method="readMesInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		<!-- 	删除站内信-->
+		<action name="delMsg" class="messagesAction" method="delMsgInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	使者等级机制-->
+		<action name="salerlevels" class="salerlevelsAction" method="findSalerlevelsInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		<!-- 	当前用户使者等级-->
+		<action name="usersalerlevels" class="salerlevelsAction" method="userSalerLevel">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>

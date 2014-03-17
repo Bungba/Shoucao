@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.model.Invcodes;
+import com.model.Rankings;
 import com.model.Salers;
+import com.model.Users;
 
 @Repository
 public class SalersDao {
@@ -43,6 +45,8 @@ public class SalersDao {
 
 	/**
 	 * 注册首草使者
+	 * 
+	 * 加入排行榜
 	 */
 	@Transactional
 	public Salers addSalersInfo(int userid, String code, String idcode,
@@ -56,6 +60,17 @@ public class SalersDao {
 		s.setUpdatetime(new Timestamp(System.currentTimeMillis()));
 		// 保存首草使者信息
 		Serializable sb = session.save(s);
+		//加入排行榜
+		if (sb != null) {
+			Query q = session.createQuery("from Users where id=?");
+			q.setInteger(0, userid);
+			Users u = (Users) q.uniqueResult();
+			Rankings r = new Rankings();
+			r.setSaleroom(0);
+			r.setName(u.getNickname());
+			r.setCity(u.getCity());
+			r.setCreationtime(new Timestamp(System.currentTimeMillis()));
+		}
 		if (sb != null) {
 			Query query = session.createQuery("from Salers where uid=?");
 			query.setInteger(0, userid);

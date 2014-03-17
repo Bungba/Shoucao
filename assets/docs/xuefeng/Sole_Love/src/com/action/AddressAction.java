@@ -66,12 +66,13 @@ public class AddressAction {
 	 * 删除配送地址
 	 * @return
 	 */
+	int addressId;
 	public String delAddressInfo(){
 		Users user = (Users) ServletActionContext.getRequest().getAttribute(
 				"User");
 		if (user != null) {
 			//if (addresses) {//判断参数是否缺失、检查参数格式是否正确
-				addressesService.delAddressInfo(user.getId(), addresses);
+				addressesService.delAddressInfo(user.getId(), addressId);
 				return "success";
 			//}
 		}
@@ -89,6 +90,12 @@ public class AddressAction {
 	}
 	public void setAddresses(Addresses addresses) {
 		this.addresses = addresses;
+	}
+	public int getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
 
 }

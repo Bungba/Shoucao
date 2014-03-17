@@ -15,8 +15,8 @@ public class Messages implements java.io.Serializable {
 	private String title;
 	private String content;
 	private String sender;
-	private Boolean hasread;
-	private Boolean delFlag;
+	private int hasread;
+	private int delFlag;
 	private Timestamp updatetime;
 	private Timestamp creationtime;
 
@@ -28,7 +28,7 @@ public class Messages implements java.io.Serializable {
 
 	/** full constructor */
 	public Messages(Integer uid, String title, String content, String sender,
-			Boolean hasread, Boolean delFlag, Timestamp updatetime,
+			int hasread, int delFlag, Timestamp updatetime,
 			Timestamp creationtime) {
 		this.uid = uid;
 		this.title = title;
@@ -82,19 +82,19 @@ public class Messages implements java.io.Serializable {
 		this.sender = sender;
 	}
 
-	public Boolean getHasread() {
+	public int getHasread() {
 		return this.hasread;
 	}
 
-	public void setHasread(Boolean hasread) {
+	public void setHasread(int hasread) {
 		this.hasread = hasread;
 	}
 
-	public Boolean getDelFlag() {
+	public int getDelFlag() {
 		return this.delFlag;
 	}
 
-	public void setDelFlag(Boolean delFlag) {
+	public void setDelFlag(int delFlag) {
 		this.delFlag = delFlag;
 	}
 

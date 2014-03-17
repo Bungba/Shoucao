@@ -79,18 +79,20 @@ public class AddressesDao {
 		}
 	}
 	/**
-	 * 修改配送地址
+	 * 删除配送地址
 	 * 
 	 * @param userid
 	 * @param addresses
 	 * @return
 	 */
 	@Transactional
-	public List<Addresses> delAddressInfo(int userid, Addresses addresses) {
+	public List<Addresses> delAddressInfo(int userid, int addressId) {
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.delete(addresses);
-			Query query = session
+			Query query=session.createQuery("from Addresses where id=?");
+			Addresses ads=(Addresses) query.uniqueResult();
+			session.delete(ads);
+			Query query1 = session
 					.createQuery("from Addresses where uid=? order by usecount desc");// 以使用次数从高到低
 			query.setInteger(0, userid);
 			List<Addresses> list = query.list();

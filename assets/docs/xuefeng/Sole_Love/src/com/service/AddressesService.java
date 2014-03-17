@@ -26,7 +26,7 @@ public class AddressesService {
 		return addressesDao.updateAddressInfo(userid, addresses);
 	}
 
-	public List<Addresses> delAddressInfo(int userid, Addresses addresses) {
-		return addressesDao.delAddressInfo(userid, addresses);
+	public List<Addresses> delAddressInfo(int userid, int addressId) {
+		return addressesDao.delAddressInfo(userid, addressId);
 	}
 }

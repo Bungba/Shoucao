@@ -2,10 +2,13 @@ package com.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Salerlevels entity. @author MyEclipse Persistence Tools
  */
-
+@Entity
 public class Salerlevels implements java.io.Serializable {
 
 	// Fields
@@ -13,7 +16,7 @@ public class Salerlevels implements java.io.Serializable {
 	private Integer id;
 	private String title;
 	private String icon;
-	private Float saleroom;
+	private double saleroom;
 	private Float ratio;
 	private Timestamp updatetime;
 	private Timestamp creationtime;
@@ -36,7 +39,7 @@ public class Salerlevels implements java.io.Serializable {
 	}
 
 	// Property accessors
-
+	@Id
 	public Integer getId() {
 		return this.id;
 	}
@@ -61,13 +64,6 @@ public class Salerlevels implements java.io.Serializable {
 		this.icon = icon;
 	}
 
-	public Float getSaleroom() {
-		return this.saleroom;
-	}
-
-	public void setSaleroom(Float saleroom) {
-		this.saleroom = saleroom;
-	}
 
 	public Float getRatio() {
 		return this.ratio;
@@ -91,6 +87,14 @@ public class Salerlevels implements java.io.Serializable {
 
 	public void setCreationtime(Timestamp creationtime) {
 		this.creationtime = creationtime;
+	}
+
+	public double getSaleroom() {
+		return saleroom;
+	}
+
+	public void setSaleroom(double saleroom) {
+		this.saleroom = saleroom;
 	}
 
 }
