@@ -59,7 +59,6 @@ public class SalersAction {
 	 * @return
 	 */
 	
-	String code;// 优惠代码
 	String idcode;// 身份证
 	String tel;// 联系方式
 	String address;// 地址
@@ -68,7 +67,7 @@ public class SalersAction {
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
 		if (user != null) {
-			salersService.addSalersInfo(user.getId(), code, idcode,invcodes);
+			salersService.addSalersInfo(user.getId(),  idcode,invcodes);
 			user = usersService.updateUserInfo(user.getId(), tel, address);
 			ServletActionContext.getRequest().getSession()
 					.removeAttribute("User");
@@ -102,14 +101,6 @@ public class SalersAction {
 
 	public void setInvcodes(String invcodes) {
 		this.invcodes = invcodes;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public String getIdcode() {

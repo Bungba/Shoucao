@@ -1,6 +1,5 @@
 package com.service;
 
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -18,7 +17,7 @@ public class SalersService {
 		return salersDao.findSalersInfo(userid);
 	}
 
-	public Salers addSalersInfo(int userid, String code, String idcode,String invcodes) {
-		return salersDao.addSalersInfo(userid, code, idcode,invcodes);
+	public Salers addSalersInfo(int userid,  String idcode,String invcodes) {
+		return salersDao.addSalersInfo(userid, idcode,invcodes);
 	}
 }

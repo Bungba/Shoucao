@@ -66,7 +66,7 @@
             </column>
         </property>
         <property name="delFlag" type="java.lang.Boolean">
-            <column name="del_flag">
+            <column name="delflag">
                 <comment>删除标志</comment>
             </column>
         </property>

@@ -23,8 +23,8 @@ public class Users implements java.io.Serializable {
 	private String mobile;
 	private String email;
 	private String password;
-	private Boolean delFlag;
-	private Boolean locked;
+	private int delFlag;
+	private int locked;
 	private Timestamp lockedtime;
 	private Timestamp lastlogintime;
 	private Timestamp updatetime;
@@ -40,7 +40,7 @@ public class Users implements java.io.Serializable {
 	public Users(String nickname, Integer gender, Date birthday,
 			Date marriageday, String tel, Integer qq, String city,
 			String address, String mobile, String email, String password,
-			Boolean delFlag, Boolean locked, Timestamp lockedtime,
+			int delFlag, int locked, Timestamp lockedtime,
 			Timestamp lastlogintime, Timestamp updatetime,
 			Timestamp creationtime) {
 		this.nickname = nickname;
@@ -160,19 +160,19 @@ public class Users implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Boolean getDelFlag() {
+	public int getDelFlag() {
 		return this.delFlag;
 	}
 
-	public void setDelFlag(Boolean delFlag) {
+	public void setDelFlag(int delFlag) {
 		this.delFlag = delFlag;
 	}
 
-	public Boolean getLocked() {
+	public int getLocked() {
 		return this.locked;
 	}
 
-	public void setLocked(Boolean locked) {
+	public void setLocked(int locked) {
 		this.locked = locked;
 	}
 

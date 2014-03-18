@@ -1,7 +1,8 @@
 package com.action;
 
-import java.awt.Graphics;
 import java.io.ByteArrayInputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -9,8 +10,10 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.model.Blacklists;
 import com.model.Salers;
 import com.model.Users;
+import com.service.BlacklistsService;
 import com.service.SalersService;
 import com.service.UsersService;
 import com.util.MD5Util;
@@ -24,6 +27,8 @@ public class LoginAction {
 	UsersService usersService;
 	@Resource
 	SalersService salersService;
+	@Resource
+	BlacklistsService blacklistsService;
 
 	String mobile;// 手机号
 	String email;// 邮箱
@@ -50,16 +55,39 @@ public class LoginAction {
 	public String login() {
 		Users users = null;
 		MD5Util md5 = new MD5Util();
+		String ip = ServletActionContext.getRequest().getRemoteAddr();
+		Blacklists blacklists = blacklistsService.logErrCount(ip);
 		String md = md5.string2MD5(password);
-		if (mobile != null && password != null) {
-			users = usersService.login(mobile, null, md);
-		} else if (email != null && password != null) {
-			users = usersService.login(null, email, md);
+		if (blacklists.getCount() == 3) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");// 设置日期格式
+			String f = df.format(new Date());
+			String l = df.format(blacklists.getUpdatetime().getTime() + 600000);
+			usersService.locked(mobile, email);// 锁定账号
+			if (Double.parseDouble(f) > Double.parseDouble(l)) {
+				usersService.unlock(mobile, email);// 解锁账号
+			}
+			return "error";
+		} else {
+			if (mobile != null && password != null) {
+				users = usersService.login(ip, mobile, null, md);
+			} else if (email != null && password != null) {
+				users = usersService.login(ip, null, email, md);
+			}
+			if (users != null) {
+				Salers salers = salersService.findSalersInfo(users.getId());// 首草使者信息
+				ServletActionContext.getRequest().getSession()
+						.setAttribute("User", users);
+				ServletActionContext.getRequest().getSession()
+						.setAttribute("Saler", salers);
+				usersService.loginDate(mobile, email);
+				blacklistsService.clearErrCount(ip);// 登陆错误次数清零
+				return "success";
+			} else if (users == null) {
+				blacklistsService.logErrCount(ip);
+				return "error";
+			}
 		}
-		Salers salers = salersService.findSalersInfo(users.getId());// 首草使者信息
-
-		ServletActionContext.getRequest().getSession().setAttribute("User", "");
-		return null;
+		return "error";
 	}
 
 	/**
@@ -140,5 +168,4 @@ public class LoginAction {
 	public void setInputStream(ByteArrayInputStream inputStream) {
 		this.inputStream = inputStream;
 	}
-
 }

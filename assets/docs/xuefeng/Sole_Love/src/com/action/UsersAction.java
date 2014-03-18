@@ -30,7 +30,7 @@ public class UsersAction {
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
 		if (user != null) {
-			usersService.findUsersInfo();
+			usersService.findUsersInfo(user.getId());
 			salersService.findSalersInfo(user.getId());
 			return "success";
 		}
@@ -55,7 +55,7 @@ public class UsersAction {
 				.getSession().getAttribute("identifie"));
 		// 将session中保存验证码字符串与客户输入的验证码字符串对比了
 		if (arandom.equals(this.getRand())) {
-			// users.setPassword(md5.string2MD5(password));
+			users.setPassword(md5.string2MD5(password));
 			ServletActionContext.getRequest().getSession()
 					.setAttribute("User", usersService.addUserInfo(users));// 用户信息存session
 		}

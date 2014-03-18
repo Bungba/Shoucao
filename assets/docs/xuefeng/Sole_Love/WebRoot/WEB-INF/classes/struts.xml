@@ -154,6 +154,23 @@
 			<result name="error">MyJsp.jsp</result>
 		</action>
 		
+		<!-- 	使者排行榜-->
+		<action name="rankings" class="rankingsAction" method="findRankingInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 	优惠代码验证-->
+		<action name="verify_saler_code" class="infosAction" method="checkVerify">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 返点记录-->
+		<action name="discounts" class="discountsAction" method="findDisInfo">
+			<result name="success">index.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+		</action>
 	</package>
 
 </struts>
