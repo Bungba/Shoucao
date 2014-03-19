@@ -3,14 +3,22 @@ package com.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Users entity. @author MyEclipse Persistence Tools
  */
-
+@Entity
 public class Users implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
 	private Integer id;
 	private String nickname;
 	private Integer gender;
@@ -63,7 +71,8 @@ public class Users implements java.io.Serializable {
 	}
 
 	// Property accessors
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getId() {
 		return this.id;
 	}
@@ -207,5 +216,6 @@ public class Users implements java.io.Serializable {
 	public void setCreationtime(Timestamp creationtime) {
 		this.creationtime = creationtime;
 	}
+
 
 }

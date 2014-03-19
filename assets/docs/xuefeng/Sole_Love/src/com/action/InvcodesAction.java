@@ -15,6 +15,10 @@ public class InvcodesAction {
 	@Resource
 	InvcodesService invcodesService;
 
+	// 返回数据
+	private String result;
+	private String error;
+	
 	/**
 	 * 查询邀请码是否使用
 	 * 
@@ -24,9 +28,11 @@ public class InvcodesAction {
 
 	public String findInvcodesInfo() {
 		if (invcodesService.findInvcodesInfo(invcodes)) {
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		} else {
-			return "error";
+			error = "{\"message\":\"邀请码无效\"}";
+			return "success";
 		}
 
 	}
@@ -45,5 +51,21 @@ public class InvcodesAction {
 
 	public void setInvcodes(String invcodes) {
 		this.invcodes = invcodes;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 }

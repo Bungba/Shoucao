@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,10 @@ public class GreetingsAction {
 	@Resource
 	GreetingsService greetingsService;
 
+	// 返回数据
+	private String result;
+	private String error;
+
 	/**
 	 * 当前用户使用过的祝福
 	 * 
@@ -31,9 +37,13 @@ public class GreetingsAction {
 		if (user != null) {
 			List<Greetings> list = greetingsService.findGreetingsInfo(user
 					.getId());
+			JSONArray ja = JSONArray.fromObject(list);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	/**
@@ -47,11 +57,15 @@ public class GreetingsAction {
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
 		if (user != null && char_id != null && bg_id != null && sound != null) {
-			greetingsService.addGreetingInfo(user.getId(), char_id, bg_id,
+			List<Greetings> list=greetingsService.addGreetingInfo(user.getId(), char_id, bg_id,
 					sound);
+			JSONArray ja=JSONArray.fromObject(list);
+			result=ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	public GreetingsService getGreetingsService() {
@@ -84,5 +98,21 @@ public class GreetingsAction {
 
 	public void setSound(String sound) {
 		this.sound = sound;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 }

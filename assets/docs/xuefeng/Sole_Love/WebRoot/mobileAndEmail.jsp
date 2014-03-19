@@ -9,7 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'mobileAndEmail.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,21 +19,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	 <script type="text/javascript" src="jquery-1.7.2.js" ></script>  
+ <script type="text/javascript" src="jquery-1.7.2.js" ></script>  
         <script type="text/javascript">
     $(document).ready( function() {  
           
         //使用 Ajax 的方式 判断登录  
         $("#btn_login").click( function() {  
               
-            var url = 'login.action';  
+            var url = 'check_email_or_mobile_existed.action';  
               
             alert("===");  
               
             //获取表单值，并以json的数据形式保存到params中  
             var params = {  
                 mobile:$("#mobile").val(),  
-                password:$("#password").val(),  
+                email:$("#email").val(),  
             }  
             //使用$.post方式      
             $.post(  
@@ -58,21 +59,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
     });  
 </script> 
-	
   </head>
   
   <body>
-  <img src="identifie.action" /> 
-   <span>用户名：</span>  
+    <span>用户名：</span>  
         <input type="text" id="mobile" name="mobile">  
         <br />  
   
         <span>密码：</span>  
-        <input type="password" name="password" id="password">  
+        <input type="text" name="email" id="email">  
         <br />  
   
         <input type="button" id="btn_login" value="Login" />  
-       <a href="zhuce.jsp">注册 </a>
-       <a href="mobileAndEmail.jsp">手机邮箱验证 </a>
   </body>
 </html>

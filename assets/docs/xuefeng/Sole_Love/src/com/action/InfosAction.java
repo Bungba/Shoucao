@@ -17,6 +17,10 @@ public class InfosAction {
 
 	String verify;
 	
+	// 返回数据
+	private String result;
+	private String error;
+	
 	/**
 	 * 优惠代码验证
 	 * @return
@@ -24,9 +28,11 @@ public class InfosAction {
 	public String checkVerify() {
 		Infos infos = infosService.checkVerify(verify);
 		if (infos != null) {
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"优惠代码不存在\"}";
+		return "success";
 	}
 
 	public InfosService getInfosService() {
@@ -43,5 +49,21 @@ public class InfosAction {
 
 	public void setVerify(String verify) {
 		this.verify = verify;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 }

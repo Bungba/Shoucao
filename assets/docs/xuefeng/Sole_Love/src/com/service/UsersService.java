@@ -15,12 +15,12 @@ public class UsersService {
 	@Resource
 	UsersDao usersDao;
 
-	public List<Users> findUsersInfo(int userid) {
+	public Users findUsersInfo(int userid) {
 		return usersDao.findUsersInfo(userid);
 	}
 
-	public Users addUserInfo(Users users) {
-		return usersDao.addUserInfo(users);
+	public Users addUserInfo(Users users,String ip) {
+		return usersDao.addUserInfo(users,ip);
 	}
 
 	public boolean check_email_or_mobile_existed(String mobile, String email) {

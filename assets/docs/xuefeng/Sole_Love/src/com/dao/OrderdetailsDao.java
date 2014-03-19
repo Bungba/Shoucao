@@ -34,7 +34,7 @@ public class OrderdetailsDao {
 	public List<Orderdetails> addOrderdetailsInfo(int oid,
 			List<Products> products, int count) {
 		Session session = sessionFactory.getCurrentSession();
-		List<String> id = new ArrayList<String>();
+		List<Integer> id = new ArrayList<Integer>();
 		if (oid != 0 && products.size() != 0 && count != 0) {
 			for (int i = 0; i < products.size(); i++) {
 				Orderdetails orderdetails = new Orderdetails();
@@ -42,8 +42,8 @@ public class OrderdetailsDao {
 				orderdetails.setPid(products.get(i).getId());
 				orderdetails.setPrice(products.get(i).getPrice());
 				orderdetails.setCount(count);
-				Serializable sb = session.save(orderdetails);
-				id.add(sb.toString());
+				Integer sb =(Integer) session.save(orderdetails);
+				id.add(sb);
 			}
 			return null;
 		}
@@ -53,7 +53,7 @@ public class OrderdetailsDao {
 			for (int i = 0; i < id.size(); i++) {
 				Query query = session
 						.createQuery("from Orderdetails where id=?");
-				query.setInteger(0, Integer.parseInt(id.get(i)));
+				query.setInteger(0, id.get(i));
 				list.add((Orderdetails) query.uniqueResult());
 			}
 			return list;

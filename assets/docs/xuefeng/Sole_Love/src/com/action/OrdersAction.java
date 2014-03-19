@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,10 @@ public class OrdersAction {
 	Orders orders;
 	int count;// 订单产品数量
 
+	// 返回数据
+	private String result;
+	private String error;
+
 	/**
 	 * 提交订单
 	 * 
@@ -48,11 +54,16 @@ public class OrdersAction {
 			if (list.iterator().hasNext()) {
 				oList = orderdetailsService.addOrderdetailsInfo(list.get(0)
 						.getId(), products, count);// 本次购买订单详情
-				return "success";
 			}
-			return "error";
+			JSONArray ja = new JSONArray();
+			ja.add(list);
+			ja.add(oList);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
+			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	/**
@@ -77,9 +88,13 @@ public class OrdersAction {
 					returnList.add(products);
 				}
 			}
+			JSONArray ja = JSONArray.fromObject(returnList);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	public OrdersService getOrdersService() {
@@ -120,6 +135,30 @@ public class OrdersAction {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public ProductsService getProductsService() {
+		return productsService;
+	}
+
+	public void setProductsService(ProductsService productsService) {
+		this.productsService = productsService;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 
 }

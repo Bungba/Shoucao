@@ -1,8 +1,6 @@
 package com.dao;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -24,11 +22,11 @@ public class UsersDao {
 	SessionFactory sessionFactory;
 
 	@Transactional
-	public List<Users> findUsersInfo(int userid) {
+	public Users findUsersInfo(int userid) {
 		Session session = sessionFactory.getCurrentSession();// 获得session
 		Query query = session.createQuery("from Users where id=?");// 查询Users数据
 		query.setInteger(0, userid);
-		List<Users> list = query.list();
+		Users list =(Users) query.uniqueResult();
 		// System.out.println(list.get(0).getEmail());
 		return list;
 	}
@@ -37,11 +35,16 @@ public class UsersDao {
 	 * 用户注册
 	 */
 	@Transactional
-	public Users addUserInfo(Users users) {
+	public Users addUserInfo(Users users, String ip) {
 		Session session = sessionFactory.getCurrentSession();
-		Serializable serializable = session.save(users);
-		if (serializable != null) {
-			return users;
+		Integer y = (Integer) session.save(users);
+		Blacklists b = new Blacklists();
+		b.setIp(ip);
+		session.save(b);
+		if (y != 0) {
+			Query query = session.createQuery("from Users where id=?");
+			query.setInteger(0, y);
+			return (Users) query.uniqueResult();
 		}
 		return null;
 	}
@@ -53,6 +56,7 @@ public class UsersDao {
 	 * @param email
 	 * @return
 	 */
+	@Transactional
 	public boolean check_email_or_mobile_existed(String mobile, String email) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session
@@ -70,14 +74,18 @@ public class UsersDao {
 	 * 用户登录
 	 */
 	@Transactional
-	public Users login(String ip,String mobile, String email, String password) {
+	public Users login(String ip, String mobile, String email, String password) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = null;
-		query=session.createQuery("from Blacklists where ip=?");
+		query = session.createQuery("from Blacklists where ip=?");
 		query.setString(0, ip);
-		Blacklists b=(Blacklists)query.uniqueResult();
-		if (b==null||b.getCount()<10) {
+		Blacklists b = (Blacklists) query.uniqueResult();
+		//System.out.println(b.getIp()+"=============");
+		if (b == null || b.getCount() < 10) {
+			//System.out.println("b == null || b.getCount() < 10");
 			if (mobile != null) {
+				//System.out.println("mobile != null");
+				//System.out.println(mobile+" "+password);
 				query = session
 						.createQuery("from Users where mobile=? and password=? and locked=0 and delflag=0");
 				query.setString(0, mobile);
@@ -116,8 +124,7 @@ public class UsersDao {
 			session.update(users);
 		}
 	}
-	
-	
+
 	/**
 	 * 注册首草使者添加用户新信息
 	 * 
@@ -139,9 +146,10 @@ public class UsersDao {
 		u = (Users) query.uniqueResult();
 		return u;
 	}
-	
+
 	/**
 	 * 登陆解锁
+	 * 
 	 * @param mobile
 	 * @param email
 	 */
@@ -150,23 +158,23 @@ public class UsersDao {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = null;
 		if (mobile != null) {
-			query = session
-					.createQuery("from Users where mobile=?");
+			query = session.createQuery("from Users where mobile=?");
 			query.setString(0, mobile);
-			Users users=(Users)query.uniqueResult();
+			Users users = (Users) query.uniqueResult();
 			users.setLocked(0);
 			session.update(users);
 		} else if (email != null) {
-			query = session
-					.createQuery("from Users where email=?");
+			query = session.createQuery("from Users where email=?");
 			query.setString(0, email);
-			Users users=(Users)query.uniqueResult();
+			Users users = (Users) query.uniqueResult();
 			users.setLocked(0);
 			session.update(users);
 		}
 	}
+
 	/**
 	 * 登陆锁定
+	 * 
 	 * @param mobile
 	 * @param email
 	 */
@@ -175,23 +183,23 @@ public class UsersDao {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = null;
 		if (mobile != null) {
-			query = session
-					.createQuery("from Users where mobile=?");
+			query = session.createQuery("from Users where mobile=?");
 			query.setString(0, mobile);
-			Users users=(Users)query.uniqueResult();
+			Users users = (Users) query.uniqueResult();
 			users.setLocked(1);
 			session.update(users);
 		} else if (email != null) {
-			query = session
-					.createQuery("from Users where email=?");
+			query = session.createQuery("from Users where email=?");
 			query.setString(0, email);
-			Users users=(Users)query.uniqueResult();
+			Users users = (Users) query.uniqueResult();
 			users.setLocked(1);
 			session.update(users);
 		}
 	}
+
 	/**
 	 * 账号永久锁定
+	 * 
 	 * @param mobile
 	 * @param email
 	 */
@@ -200,17 +208,15 @@ public class UsersDao {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = null;
 		if (mobile != null) {
-			query = session
-					.createQuery("from Users where mobile=?");
+			query = session.createQuery("from Users where mobile=?");
 			query.setString(0, mobile);
-			Users users=(Users)query.uniqueResult();
+			Users users = (Users) query.uniqueResult();
 			users.setDelFlag(1);
 			session.update(users);
 		} else if (email != null) {
-			query = session
-					.createQuery("from Users where email=?");
+			query = session.createQuery("from Users where email=?");
 			query.setString(0, email);
-			Users users=(Users)query.uniqueResult();
+			Users users = (Users) query.uniqueResult();
 			users.setDelFlag(1);
 			session.update(users);
 		}

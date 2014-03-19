@@ -89,7 +89,7 @@ public class RandomNumUtil {
 			g.drawString(rand, 13 * i + 6, 16);
 		}*/
 		// 赋值验证码
-		this.str = sRand;
+		this.str = randomCode.toString();
 		// 图象生效
 		g.dispose();
 		ByteArrayInputStream input = null;

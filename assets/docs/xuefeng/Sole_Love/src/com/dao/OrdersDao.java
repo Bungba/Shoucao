@@ -29,10 +29,10 @@ public class OrdersDao {
 	@Transactional
 	public List<Orders> addOrdersInfo(Orders orders) {
 		Session session = sessionFactory.getCurrentSession();
-		Serializable sb = session.save(orders);
+		Integer sb = (Integer) session.save(orders);
 		if (sb != null) {
 			Query query = session.createQuery("from Orders where id=?");
-			query.setInteger(0, Integer.parseInt(sb.toString()));
+			query.setInteger(0, sb);
 			List<Orders> list = query.list();
 			return list;
 		}
@@ -45,8 +45,7 @@ public class OrdersDao {
 	@Transactional
 	public List<Orders> findAllOrdersInfo(int userid) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("from Orders where uid=?");
+		Query query = session.createQuery("from Orders where uid=?");
 		query.setInteger(0, userid);
 		List<Orders> list = query.list();
 		if (list != null) {

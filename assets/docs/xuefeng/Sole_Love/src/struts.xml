@@ -10,7 +10,7 @@
 	<constant name="struts.ui.theme" value="simple"></constant>
 
 
-	<package name="default" namespace="/" extends="struts-default">
+	<package name="default" namespace="/" extends="json-default">
 
 		<default-action-ref name="index" />
 		<!-- 产品列表 -->
@@ -28,8 +28,11 @@
 		
 		<!-- 用户注册 -->
 		<action name="register" class="usersAction" method="addUserInfo">
-			<result name="success">index.jsp</result>
-			<result name="input">MyJsp.jsp</result>
+			<result type="json">  
+                <!-- root的值对应要返回的值的属性 -->  
+                <!-- 这里的result值即是 对应action中的 result -->  
+                <param name="root">result</param>  
+            </result> 
 		</action>
 		
 		<!-- 验证手机或者邮箱是否存在 -->
@@ -37,6 +40,13 @@
 			method="check_email_or_mobile_existed">
 			<result name="success">index.jsp</result>
 			<result name="input">MyJsp.jsp</result>
+		</action>
+		
+		<!-- 验证 验证码 -->
+		<action name="checkId" class="usersAction" method="checkIdentifie">
+			<result type="json">
+				<param name="root">error</param>  
+			</result>
 		</action>
 		
 		<!-- 验证码 -->
@@ -50,7 +60,7 @@
 		<!-- 	login -->
 		<action name="login" class="loginAction" method="login">
 			<result name="success">index.jsp</result>
-			<result name="input">MyJsp.jsp</result>
+			<result name="error">MyJsp.jsp</result>
 		</action>
 		
 		<!-- 	logout -->

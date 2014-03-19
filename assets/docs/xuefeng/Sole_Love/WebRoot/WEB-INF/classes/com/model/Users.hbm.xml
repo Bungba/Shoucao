@@ -65,12 +65,12 @@
                 <comment>用户密码</comment>
             </column>
         </property>
-        <property name="delFlag" type="java.lang.Boolean">
+        <property name="delFlag" type="java.lang.Integer">
             <column name="delflag">
                 <comment>删除标志</comment>
             </column>
         </property>
-        <property name="locked" type="java.lang.Boolean">
+        <property name="locked" type="java.lang.Integer">
             <column name="locked">
                 <comment>账户是否锁定</comment>
             </column>

@@ -20,4 +20,7 @@ public class BlacklistsService {
 	public void clearErrCount(String ip) {
 		blacklistsDao.clearErrCount(ip);
 	}
+	public Blacklists findBlacklistsInfo(String ip) {
+		return blacklistsDao.findBlacklistsInfo(ip);
+	}
 }

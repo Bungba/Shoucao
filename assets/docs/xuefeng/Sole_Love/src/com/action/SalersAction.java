@@ -3,6 +3,9 @@ package com.action;
 import javax.annotation.Resource;
 import javax.crypto.spec.IvParameterSpec;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,10 @@ public class SalersAction {
 	@Resource
 	UsersService usersService;
 
+	// 返回数据
+	private String result;
+	private String error;
+
 	/**
 	 * 首草使者信息
 	 * 
@@ -35,30 +42,23 @@ public class SalersAction {
 				.getAttribute("User");
 		if (user != null) {
 			Salers salers = salersService.findSalersInfo(user.getId());
+			JSONObject jo = JSONObject.fromObject(salers);
+			result = jo.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
-	/**
-	 * 查询邀请码是否使用
-	 * 
-	 * @return
-	 */
 	String invcodes;// 邀请码
-	public String findInvcodesInfo() {
-		if (invcodesService.findInvcodesInfo(invcodes)) {
-			return "success";
-		}
-		return "error";
-	}
 
 	/**
 	 * 注册首草使者
 	 * 
 	 * @return
 	 */
-	
+
 	String idcode;// 身份证
 	String tel;// 联系方式
 	String address;// 地址
@@ -67,16 +67,24 @@ public class SalersAction {
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
 		if (user != null) {
-			salersService.addSalersInfo(user.getId(),  idcode,invcodes);
+			Salers salers = salersService.addSalersInfo(user.getId(), idcode,
+					invcodes);
 			user = usersService.updateUserInfo(user.getId(), tel, address);
 			ServletActionContext.getRequest().getSession()
 					.removeAttribute("User");
 			ServletActionContext.getRequest().getSession()
 					.setAttribute("User", user);
+			ServletActionContext.getRequest().getSession()
+					.setAttribute("Saler", salers);
+			JSONArray ja = new JSONArray();
+			ja.add(user);
+			ja.add(salers);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	public SalersService getSalersService() {

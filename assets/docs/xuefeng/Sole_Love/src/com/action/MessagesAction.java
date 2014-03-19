@@ -1,6 +1,10 @@
 package com.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +21,10 @@ public class MessagesAction {
 	@Resource
 	MessagesService messagesService;
 
+	// 返回数据
+	private String result;
+	private String error;
+
 	/**
 	 * 查询站内信
 	 * 
@@ -26,10 +34,14 @@ public class MessagesAction {
 		Users user = (Users) ServletActionContext.getRequest().getAttribute(
 				"User");
 		if (user != null) {
-			messagesService.findMsgInfo(user.getId());
+			List<Messages> list = messagesService.findMsgInfo(user.getId());
+			JSONArray ja = JSONArray.fromObject(list);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	/**
@@ -43,10 +55,15 @@ public class MessagesAction {
 		Users user = (Users) ServletActionContext.getRequest().getAttribute(
 				"User");
 		if (user != null) {
-			messagesService.readMesInfo(user.getId(), msgId);
+			List<Messages> list = messagesService.readMesInfo(user.getId(),
+					msgId);
+			JSONArray ja = JSONArray.fromObject(list);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "error";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	/**
@@ -77,10 +94,14 @@ public class MessagesAction {
 		Users user = (Users) ServletActionContext.getRequest().getAttribute(
 				"User");
 		if (user != null) {
-			messagesService.delMsgInfo(id, user.getId());
+			List<Messages> list = messagesService.delMsgInfo(id, user.getId());
+			JSONArray ja = JSONArray.fromObject(list);
+			result = ja.toString();
+			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		return "erro";
+		error = "{\"message\":\"用户未登录\"}";
+		return "success";
 	}
 
 	public MessagesService getMessagesService() {
@@ -105,5 +126,21 @@ public class MessagesAction {
 
 	public void setId(int[] id) {
 		this.id = id;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 }
