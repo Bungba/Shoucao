@@ -78,7 +78,8 @@ public class AddressAction {
 				"User");
 		if (user != null) {
 			// if (addresses) {//判断参数是否缺失、检查参数格式是否正确
-			List<Addresses> list=addressesService.updateAddressInfo(user.getId(), addresses);
+			List<Addresses> list = addressesService.updateAddressInfo(
+					user.getId(), addresses);
 			JSONArray ja = JSONArray.fromObject(list);
 			result = ja.toString();
 			error = "{\"message\":\"无错误\"}";
@@ -101,7 +102,8 @@ public class AddressAction {
 				"User");
 		if (user != null) {
 			// if (addresses) {//判断参数是否缺失、检查参数格式是否正确
-			List<Addresses> list=addressesService.delAddressInfo(user.getId(), addressId);
+			List<Addresses> list = addressesService.delAddressInfo(
+					user.getId(), addressId);
 			JSONArray ja = JSONArray.fromObject(list);
 			result = ja.toString();
 			error = "{\"message\":\"无错误\"}";

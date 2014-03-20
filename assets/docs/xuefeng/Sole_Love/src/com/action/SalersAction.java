@@ -38,6 +38,7 @@ public class SalersAction {
 	 * @return
 	 */
 	public String findSalersInfo() {
+		
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
 		if (user != null) {
@@ -141,6 +142,22 @@ public class SalersAction {
 
 	public void setUsersService(UsersService usersService) {
 		this.usersService = usersService;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 
 }

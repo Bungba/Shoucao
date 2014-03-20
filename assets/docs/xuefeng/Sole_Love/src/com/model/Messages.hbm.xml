@@ -30,12 +30,12 @@
                 <comment>发信人</comment>
             </column>
         </property>
-        <property name="hasread" type="java.lang.Boolean">
+        <property name="hasread" type="java.lang.Integer">
             <column name="hasread">
                 <comment>是否读过</comment>
             </column>
         </property>
-        <property name="delFlag" type="java.lang.Boolean">
+        <property name="delFlag" type="java.lang.Integer">
             <column name="del_flag">
                 <comment>删除标志</comment>
             </column>

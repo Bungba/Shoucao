@@ -24,8 +24,8 @@ public class DiscountsAction {
 	private String error;
 
 	public String findDisInfo() {
-		Salers saler = (Salers) ServletActionContext.getRequest().getAttribute(
-				"Saler");
+		
+		Salers saler = (Salers) ServletActionContext.getRequest().getAttribute("Saler");
 		if (saler != null) {
 			Discounts d = discountsService.findDisInfo(saler.getId());
 			JSONObject jo = JSONObject.fromObject(d);

@@ -7,15 +7,20 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.model.FindOrder;
 import com.model.Orderdetails;
 import com.model.Orders;
 import com.model.Products;
+import com.model.Users;
 
 @Repository
 public class OrderdetailsDao {
@@ -42,7 +47,7 @@ public class OrderdetailsDao {
 				orderdetails.setPid(products.get(i).getId());
 				orderdetails.setPrice(products.get(i).getPrice());
 				orderdetails.setCount(count);
-				Integer sb =(Integer) session.save(orderdetails);
+				Integer sb = (Integer) session.save(orderdetails);
 				id.add(sb);
 			}
 			return null;
@@ -63,19 +68,36 @@ public class OrderdetailsDao {
 
 	/**
 	 * 当前用户订单详情
+	 * 
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
 	 */
 	@Transactional
-	public List<Orderdetails> findOrderdetailsInfo(List<Orders> list) {
+	public JSONObject findOrderdetailsInfo(int userid) {
 		Session session = sessionFactory.getCurrentSession();
-		List<Orderdetails> detailsList = new ArrayList<Orderdetails>();
-		for (int i = 0; i < list.size(); i++) {
-			Query query = session.createQuery("from Orderdetails where oid=?");
-			query.setInteger(0, list.get(i).getId());
-			detailsList.add((Orderdetails) query.uniqueResult());
+		/*
+		 * StringBuilder sb = new StringBuilder();
+		 * sb.append("SELECT o.city,o.address,");
+		 * sb.append(" o.code,o.discount,"); sb.append(" o.message,o.express,");
+		 * sb.append(" o.express_fee,o.returned,"); sb.append(" os.count,");
+		 * sb.append(" p.title,p.des,p.thumbnail,");
+		 * sb.append(" p.price,p.image");
+		 * sb.append(" FROM users u,orders o, Orderdetails os,products p");
+		 * sb.append(" WHERE u.id=o.uid"); sb.append(" AND o.id=os.oid");
+		 * sb.append(" AND os.pid=p.id"); sb.append(" AND u.id=?");
+		 */
+		Query query = session
+				.createQuery("FROM Users u,Orders o, Orderdetails os,Products p WHERE u.id=o.uid AND o.id=os.oid AND os.pid=p.id AND u.id=?");
+		query.setInteger(0, userid);
+		ArrayList list = (ArrayList) query.list();
+		Iterator iterator = list.iterator();
+		if (iterator.hasNext()) {
+			// Object[] o = (Object[]) iterator.next();
+			// System.out.println((Users)o[0]);
+			JSONObject jo = JSONObject.fromObject(list);
+			return jo;
 		}
-		if (detailsList.size() != 0) {
-			return detailsList;
-		}
+		// System.out.println(jo.toString());
 		return null;
 	}
 }

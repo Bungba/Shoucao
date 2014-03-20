@@ -42,7 +42,7 @@ public class SalerlevelsAction {
 	 * @return
 	 */
 	public String userSalerLevel() {
-
+		
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
 		if (user != null) {

@@ -31,7 +31,12 @@ public class MessagesAction {
 	 * @return
 	 */
 	public String findMsgInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
+		List<Messages> list = messagesService.findMsgInfo(1);
+		JSONArray ja = JSONArray.fromObject(list);
+		result = ja.toString();
+		error = "{\"message\":\"ÎÞ´íÎó\"}";
+		return "success";
+		/*Users user = (Users) ServletActionContext.getRequest().getAttribute(
 				"User");
 		if (user != null) {
 			List<Messages> list = messagesService.findMsgInfo(user.getId());
@@ -41,7 +46,7 @@ public class MessagesAction {
 			return "success";
 		}
 		error = "{\"message\":\"ÓÃ»§Î´µÇÂ¼\"}";
-		return "success";
+		return "success";*/
 	}
 
 	/**

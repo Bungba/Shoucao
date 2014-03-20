@@ -82,22 +82,6 @@ public class Messages implements java.io.Serializable {
 		this.sender = sender;
 	}
 
-	public int getHasread() {
-		return this.hasread;
-	}
-
-	public void setHasread(int hasread) {
-		this.hasread = hasread;
-	}
-
-	public int getDelFlag() {
-		return this.delFlag;
-	}
-
-	public void setDelFlag(int delFlag) {
-		this.delFlag = delFlag;
-	}
-
 	public Timestamp getUpdatetime() {
 		return this.updatetime;
 	}
@@ -112,6 +96,22 @@ public class Messages implements java.io.Serializable {
 
 	public void setCreationtime(Timestamp creationtime) {
 		this.creationtime = creationtime;
+	}
+
+	public int getHasread() {
+		return hasread;
+	}
+
+	public void setHasread(int hasread) {
+		this.hasread = hasread;
+	}
+
+	public int getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(int delFlag) {
+		this.delFlag = delFlag;
 	}
 
 }

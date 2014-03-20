@@ -44,6 +44,7 @@ public class OrdersAction {
 	 * @return
 	 */
 	public String addOrdersInfo() {
+
 		List<Orders> list = new ArrayList<Orders>();
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");// 取得session中的User
@@ -74,22 +75,8 @@ public class OrdersAction {
 	public String findAllOrdersInfo() {
 		Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");
-		List returnList = new ArrayList();
 		if (user != null) {
-			List<Orders> orders = ordersService.findAllOrdersInfo(user.getId());
-			returnList.add(orders);
-			if (orders.size() != 0) {
-				List<Orderdetails> orderdetails = orderdetailsService
-						.findOrderdetailsInfo(orders);
-				returnList.add(orderdetails);
-				if (orderdetails.size() != 0) {
-					List<Products> products = productsService
-							.findProductsInfo(orderdetails);
-					returnList.add(products);
-				}
-			}
-			JSONArray ja = JSONArray.fromObject(returnList);
-			result = ja.toString();
+			result = orderdetailsService.findOrderdetailsInfo(user.getId()).toString();
 			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}

@@ -36,14 +36,14 @@ public class FirstAndLastDate {
 		return df.format(new Date());
 	}
 	
-	/*public static void main(String[] args) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
-		System.out.println(df.format(new Timestamp(System.currentTimeMillis())));
-		System.out.println(df.format(new Date()));
+	public static void main(String[] args) {
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+//		System.out.println(df.format(new Timestamp(System.currentTimeMillis())));
+//		System.out.println(df.format(new Date()));
 		//String f=df.format(new Timestamp(System.currentTimeMillis())).replace(":", "").replace("-", "");
 		//String l=df.format(new Date(new Date().getTime()+600000)).replace(":", "").replace("-", "");
 //		if (Double.parseDouble(l)>Double.parseDouble(f)) {
 //			System.out.println("aaaaaaa");
 //		}
-	}*/
+	}
 }

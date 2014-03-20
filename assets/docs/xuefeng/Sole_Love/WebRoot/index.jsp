@@ -71,8 +71,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input type="password" name="password" id="password">  
         <br />  
   
-        <input type="button" id="btn_login" value="Login" />  
-       <a href="zhuce.jsp">注册 </a>
-       <a href="mobileAndEmail.jsp">手机邮箱验证 </a>
+        <input type="button" id="btn_login" value="Login" />   <br />  
+       <a href="zhuce.jsp">注册 </a> <br />  
+       <a href="mobileAndEmail.jsp">手机邮箱验证 </a> <br />  
+       <a href="products.jsp">产品列表 </a> <br />  
   </body>
 </html>

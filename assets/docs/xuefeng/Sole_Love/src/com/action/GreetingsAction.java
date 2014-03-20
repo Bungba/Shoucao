@@ -31,7 +31,8 @@ public class GreetingsAction {
 	 * @return
 	 */
 	public String findGreetingInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getSession()
+		
+	Users user = (Users) ServletActionContext.getRequest().getSession()
 				.getAttribute("User");// 取出session中的当前用户
 		// greetingsService.findGreetingsInfo(user.getId());
 		if (user != null) {
