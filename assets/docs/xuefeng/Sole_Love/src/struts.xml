@@ -35,8 +35,9 @@
 		<!-- 验证手机或者邮箱是否存在 -->
 		<action name="check_email_or_mobile_existed" class="loginAction"
 			method="check_email_or_mobile_existed">
-			<result name="success">index.jsp</result>
-			<result name="input">MyJsp.jsp</result>
+			<result type="json">  
+                <param name="root">result</param>  
+            </result> 
 		</action>
 		
 		<!-- 验证 验证码 -->

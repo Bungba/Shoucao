@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'MyJsp.jsp' starting page</title>
+<title>My JSP 'all_order.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -25,20 +25,15 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#btn_login").click(function() {
-			var url = 'products.action';
-			$.post(
-			url, //服务器要接受的url  
+			var url = 'all_order.action';
+			$.post(url, //服务器要接受的url  
 			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
-				data=data.replace("[", "").replace("]", "");
-				alert(data.count);
-				//var m = eval("(" + data + ")"); //包数据解析为json 格式    
-			
-				
-				$('#result').html("欢迎您：  " + data);
-
-			},
-
-			'json' //数据传递的类型  json  
+				data = data.replace("[", "").replace("]", "");
+				data = data.replace("[", "").replace("]", "");
+				alert(data);
+				var member = eval("(" + data + ")"); //包数据解析为json 格式    
+				$('#result').val(member.address);
+			}, 'json' //数据传递的类型  json  
 			);
 		});
 	});
@@ -47,9 +42,6 @@
 
 <body>
 	<input type="button" id="btn_login" value="Login" />
-	<br /> 这里显示ajax信息：
-	<br />
-	<span id="result"></span>
-
+	<input type="text" id="result">
 </body>
 </html>

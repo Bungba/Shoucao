@@ -24,7 +24,6 @@ public class BlacklistsDao {
 	 * @param ip
 	 * @return
 	 */
-	
 
 	@Transactional
 	public Blacklists logErrCount(String ip) {
@@ -33,11 +32,11 @@ public class BlacklistsDao {
 		query.setString(0, ip);
 		Blacklists b = (Blacklists) query.uniqueResult();
 		if (b != null) {
-			//System.out.println(b.getCount());
+			// System.out.println(b.getCount());
 			int i = b.getCount();
-			//System.out.println(b.getIp());
+			// System.out.println(b.getIp());
 			b.setCount(++i);
-			//System.out.println(b.getCount());
+			// System.out.println(b.getCount());
 			b.setCreationtime(new Timestamp(System.currentTimeMillis()));
 			b.setUpdatetime(new Timestamp(System.currentTimeMillis()));
 			session.update(b);
@@ -61,9 +60,9 @@ public class BlacklistsDao {
 		Query query = session.createQuery("from Blacklists where ip=?");
 		query.setString(0, ip);
 		Blacklists b = (Blacklists) query.uniqueResult();
-		//System.out.println("clearErrCount------------------");
+		// System.out.println("clearErrCount------------------");
 		if (b != null) {
-			//System.out.println("clearErrCount------------------00000000");
+			// System.out.println("clearErrCount------------------00000000");
 			b.setCount(0);
 			b.setCreationtime(new Timestamp(System.currentTimeMillis()));
 			b.setUpdatetime(new Timestamp(System.currentTimeMillis()));
@@ -76,7 +75,18 @@ public class BlacklistsDao {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from Blacklists where ip=?");
 		query.setString(0, ip);
-		Blacklists b = (Blacklists) query.uniqueResult();
-		return b;
+		Blacklists bk = (Blacklists) query.uniqueResult();
+		if (bk == null) {
+			Blacklists b = new Blacklists();
+			b.setIp(ip);
+			b.setCount(0);
+			b.setCreationtime(new Timestamp(System.currentTimeMillis()));
+			b.setUpdatetime(new Timestamp(System.currentTimeMillis()));
+			Integer x = (Integer) session.save(b);
+			System.out.println("²»ÊÇ¿Õ");
+			return b;
+		} else {
+			return bk;
+		}
 	}
 }

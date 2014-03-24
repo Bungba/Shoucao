@@ -84,10 +84,24 @@ public class SalersAction {
 			error = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "{\"message\":\"用户未登录\"}";
 		return "success";
 	}
-
+	
+	public String findInvcodesInfo() {
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
+		if (user!=null) {
+			if (salersService.findInvcodesInfo(invcodes)) 
+				result="{\"message\":\"邀请码可用\"}";
+			else
+				result="{\"message\":\"邀请码不可用\"}";
+			return "success";
+		}
+		result = "{\"message\":\"用户未登录\"}";
+		return "success";
+	}
+	
 	public SalersService getSalersService() {
 		return salersService;
 	}

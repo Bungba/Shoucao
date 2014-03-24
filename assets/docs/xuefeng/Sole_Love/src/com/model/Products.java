@@ -2,6 +2,8 @@ package com.model;
 
 import java.sql.Timestamp;
 
+import org.apache.struts2.json.annotations.JSON;
+
 /**
  * Products entity. @author MyEclipse Persistence Tools
  */
@@ -107,7 +109,7 @@ public class Products implements java.io.Serializable {
 	public void setDelFlag(Boolean delFlag) {
 		this.delFlag = delFlag;
 	}
-
+	
 	public Timestamp getUpdatetime() {
 		return this.updatetime;
 	}
@@ -115,7 +117,7 @@ public class Products implements java.io.Serializable {
 	public void setUpdatetime(Timestamp updatetime) {
 		this.updatetime = updatetime;
 	}
-
+	
 	public Timestamp getCreationtime() {
 		return this.creationtime;
 	}

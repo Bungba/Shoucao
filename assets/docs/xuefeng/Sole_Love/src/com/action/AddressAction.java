@@ -1,5 +1,7 @@
 package com.action;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,8 +33,8 @@ public class AddressAction {
 	 * @return
 	 */
 	public String findAddInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
-				"User");
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
 		if (user != null) {
 			List<Addresses> list = addressesService.findAddInfo(user.getId());
 			JSONArray ja = JSONArray.fromObject(list);
@@ -44,18 +46,34 @@ public class AddressAction {
 		return "success";
 	}
 
-	Addresses addresses;
-
 	/**
 	 * 添加配送地址
 	 * 
 	 * @return
 	 */
+	String name;
+	String address;
+	String city;
+	String zip;
+	String tel;
+
 	public String addAddressInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
-				"User");
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
 		if (user != null) {
 			// if (addresses) {//判断参数是否缺失、检查参数格式是否正确
+			Addresses addresses = new Addresses();
+			addresses.setUid(user.getId());
+			addresses.setName(name);
+			addresses.setAddress(address);
+			addresses.setCity(city);
+			addresses.setZip(zip);
+			addresses.setTel(tel);
+			addresses.setDelFlag(false);
+			addresses.setUsecount(0);
+			addresses
+					.setCreationtime(new Timestamp(System.currentTimeMillis()));
+			addresses.setUpdatetime(new Timestamp(System.currentTimeMillis()));
 			List<Addresses> list = addressesService.addAddressInfo(
 					user.getId(), addresses);
 			JSONArray ja = JSONArray.fromObject(list);
@@ -73,10 +91,25 @@ public class AddressAction {
 	 * 
 	 * @return
 	 */
+	String id;
+	String count;
+	boolean flag;
+
 	public String updateAddressInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
-				"User");
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
 		if (user != null) {
+			Addresses addresses = new Addresses();
+			addresses.setUid(user.getId());
+			addresses.setId(Integer.parseInt(id));
+			addresses.setName(name);
+			addresses.setAddress(address);
+			addresses.setCity(city);
+			addresses.setZip(zip);
+			addresses.setTel(tel);
+			addresses.setUsecount(Integer.parseInt(count));
+			addresses.setDelFlag(flag);
+			addresses.setUpdatetime(new Timestamp(System.currentTimeMillis()));
 			// if (addresses) {//判断参数是否缺失、检查参数格式是否正确
 			List<Addresses> list = addressesService.updateAddressInfo(
 					user.getId(), addresses);
@@ -95,15 +128,15 @@ public class AddressAction {
 	 * 
 	 * @return
 	 */
-	int addressId;
 
 	public String delAddressInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
-				"User");
+		Users user = (Users) ServletActionContext.getRequest().getSession()
+				.getAttribute("User");
 		if (user != null) {
 			// if (addresses) {//判断参数是否缺失、检查参数格式是否正确
+			System.out.println(user.getId()+"----------------------"+id);
 			List<Addresses> list = addressesService.delAddressInfo(
-					user.getId(), addressId);
+					user.getId(), Integer.parseInt(id));
 			JSONArray ja = JSONArray.fromObject(list);
 			result = ja.toString();
 			error = "{\"message\":\"无错误\"}";
@@ -122,22 +155,6 @@ public class AddressAction {
 		this.addressesService = addressesService;
 	}
 
-	public Addresses getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(Addresses addresses) {
-		this.addresses = addresses;
-	}
-
-	public int getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
-
 	public String getResult() {
 		return result;
 	}
@@ -152,6 +169,70 @@ public class AddressAction {
 
 	public void setError(String error) {
 		this.error = error;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
 	}
 
 }

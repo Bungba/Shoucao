@@ -28,10 +28,10 @@ public class InfosAction {
 	public String checkVerify() {
 		Infos infos = infosService.checkVerify(verify);
 		if (infos != null) {
-			error = "{\"message\":\"无错误\"}";
+			result = "{\"message\":\"无错误\"}";
 			return "success";
 		}
-		error = "{\"message\":\"优惠代码不存在\"}";
+		result = "{\"message\":\"优惠代码不存在\"}";
 		return "success";
 	}
 

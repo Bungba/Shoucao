@@ -20,4 +20,7 @@ public class SalersService {
 	public Salers addSalersInfo(int userid,  String idcode,String invcodes) {
 		return salersDao.addSalersInfo(userid, idcode,invcodes);
 	}
+	public boolean findInvcodesInfo(String invcodes) {
+		return salersDao.findInvcodesInfo(invcodes);
+	}
 }

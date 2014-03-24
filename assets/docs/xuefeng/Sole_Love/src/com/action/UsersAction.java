@@ -66,6 +66,7 @@ public class UsersAction {
 	 * 
 	 * @return
 	 */
+	String nickname;
 	String mobile;//  ÷ª˙∫≈
 	String email;// ” œ‰
 	String name;
@@ -190,5 +191,14 @@ public class UsersAction {
 	public void setError(String error) {
 		this.error = error;
 	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 
 }

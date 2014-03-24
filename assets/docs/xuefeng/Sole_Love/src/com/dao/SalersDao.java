@@ -61,7 +61,7 @@ public class SalersDao {
 		// 保存首草使者信息
 		Serializable sb = session.save(s);
 		joinRanking(sb, userid);// 加入排行榜
-		joinDiscounts(userid);//创建返点记录
+		joinDiscounts(userid);// 创建返点记录
 		if (sb != null) {
 			Query query = session.createQuery("from Salers where uid=?");
 			query.setInteger(0, userid);
@@ -116,5 +116,20 @@ public class SalersDao {
 				System.out.println("创建返点记录失败");
 			}
 		}
+	}
+
+	/**
+	 * 邀请码是否可用
+	 */
+	@Transactional
+	public boolean findInvcodesInfo(String invcodes) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Invcodes where code=? and sid=0");
+		query.setString(0, invcodes);
+		Invcodes i = (Invcodes) query.uniqueResult();
+		if (i != null)
+			return true;
+		else
+			return false;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class OrderdetailsService {
 		return orderdetailsDao.addOrderdetailsInfo(oid, products, count);
 	}
 
-	public JSONObject findOrderdetailsInfo(int userid) {
+	public JSONArray findOrderdetailsInfo(int userid) {
 		return orderdetailsDao.findOrderdetailsInfo(userid);
 	}
 }

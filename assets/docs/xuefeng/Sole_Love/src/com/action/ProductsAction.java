@@ -19,6 +19,7 @@ public class ProductsAction {
 	ProductsService productsService;
 
 	// ·µ»ØÊý¾Ý
+	
 	private String result;
 	private String error;
 

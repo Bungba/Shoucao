@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
+import org.hibernate.validator.constraints.Email;
 
 /**
  * Users entity. @author MyEclipse Persistence Tools
@@ -20,6 +25,7 @@ public class Users implements java.io.Serializable {
 	 * 
 	 */
 	private Integer id;
+	@NotNull(message="用户名不能为空")
 	private String nickname;
 	private Integer gender;
 	private Date birthday;
@@ -29,7 +35,9 @@ public class Users implements java.io.Serializable {
 	private String city;
 	private String address;
 	private String mobile;
+	@Email
 	private String email;
+	@Size(min=4,max=8, message="密码长度应为{min}-{max}位")
 	private String password;
 	private int delFlag;
 	private int locked;

@@ -31,12 +31,8 @@ public class MessagesAction {
 	 * @return
 	 */
 	public String findMsgInfo() {
-		List<Messages> list = messagesService.findMsgInfo(1);
-		JSONArray ja = JSONArray.fromObject(list);
-		result = ja.toString();
-		error = "{\"message\":\"无错误\"}";
-		return "success";
-		/*Users user = (Users) ServletActionContext.getRequest().getAttribute(
+		
+		Users user = (Users) ServletActionContext.getRequest().getSession().getAttribute(
 				"User");
 		if (user != null) {
 			List<Messages> list = messagesService.findMsgInfo(user.getId());
@@ -46,7 +42,7 @@ public class MessagesAction {
 			return "success";
 		}
 		error = "{\"message\":\"用户未登录\"}";
-		return "success";*/
+		return "success";
 	}
 
 	/**
@@ -57,7 +53,7 @@ public class MessagesAction {
 	int msgId;// 站内信ID
 
 	public String readMesInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
+		Users user = (Users) ServletActionContext.getRequest().getSession().getAttribute(
 				"User");
 		if (user != null) {
 			List<Messages> list = messagesService.readMesInfo(user.getId(),
@@ -77,7 +73,7 @@ public class MessagesAction {
 	 * @return
 	 */
 	public String addMsgInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
+		Users user = (Users) ServletActionContext.getRequest().getSession().getAttribute(
 				"User");
 		if (user != null) {
 			Messages messages = new Messages();
@@ -96,7 +92,7 @@ public class MessagesAction {
 	int[] id;
 
 	public String delMsgInfo() {
-		Users user = (Users) ServletActionContext.getRequest().getAttribute(
+		Users user = (Users) ServletActionContext.getRequest().getSession().getAttribute(
 				"User");
 		if (user != null) {
 			List<Messages> list = messagesService.delMsgInfo(id, user.getId());

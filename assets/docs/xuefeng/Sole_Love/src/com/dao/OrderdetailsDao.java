@@ -73,7 +73,7 @@ public class OrderdetailsDao {
 	 * @throws SecurityException
 	 */
 	@Transactional
-	public JSONObject findOrderdetailsInfo(int userid) {
+	public JSONArray findOrderdetailsInfo(int userid) {
 		Session session = sessionFactory.getCurrentSession();
 		/*
 		 * StringBuilder sb = new StringBuilder();
@@ -94,8 +94,8 @@ public class OrderdetailsDao {
 		if (iterator.hasNext()) {
 			// Object[] o = (Object[]) iterator.next();
 			// System.out.println((Users)o[0]);
-			JSONObject jo = JSONObject.fromObject(list);
-			return jo;
+			JSONArray ja=JSONArray.fromObject(list);
+			return ja;
 		}
 		// System.out.println(jo.toString());
 		return null;

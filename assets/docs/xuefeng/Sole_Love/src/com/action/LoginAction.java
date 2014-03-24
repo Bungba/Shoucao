@@ -34,7 +34,6 @@ public class LoginAction {
 
 	// 返回数据
 	private String result;
-	private String error;
 
 	String mobile;// 手机号
 	String email;// 邮箱
@@ -51,11 +50,10 @@ public class LoginAction {
 		// System.out.println(mobile+"    "+email);
 		boolean bool = usersService
 				.check_email_or_mobile_existed(mobile, email);
-		if (bool) {
-			error = "{\"message\":\"无错误\"}";
-			return "success";
-		}
-		error = "{\"message\":\"手机或者邮箱已存在\"}";
+		if (bool)
+			result = "{\"message\":\"无错误\"}";
+		else
+			result = "{\"message\":\"手机或者邮箱已存在\"}";
 		return "success";
 	}
 
@@ -86,6 +84,7 @@ public class LoginAction {
 					users = usersService.login(ip, null, email, md);
 				}
 				if (users != null) {
+					System.out.println("Login---------111------>users != null");
 					Salers salers = salersService.findSalersInfo(users.getId());// 首草使者信息
 					ServletActionContext.getRequest().getSession()
 							.setAttribute("User", users);
@@ -100,14 +99,14 @@ public class LoginAction {
 					return "success";
 				} else if (users == null) {
 					blacklistsService.logErrCount(ip);
-					error = "{\"message\":\"用户名或者密码不正确\"}";
+					result = "{\"message\":\"用户名或者密码不正确\"}";
 					return "success";
 				}
 			}
-			error = "{\"message\":\"账号已锁定,10分钟内不可登录\"}";
+			result = "{\"message\":\"账号已锁定,10分钟内不可登录\"}";
 			return "success";
 		} else if (blacklists.getCount() >= 10) {
-			error = "{\"message\":\"IP地址已被Block\"}";
+			result = "{\"message\":\"IP地址已被Block\"}";
 			return "success";
 		} else {
 			if (mobile != null && password != null) {
@@ -116,6 +115,7 @@ public class LoginAction {
 				users = usersService.login(ip, null, email, md);
 			}
 			if (users != null) {
+				System.out.println("Login--------222------->users != null");
 				Salers salers = salersService.findSalersInfo(users.getId());// 首草使者信息
 				ServletActionContext.getRequest().getSession()
 						.setAttribute("User", users);
@@ -130,7 +130,7 @@ public class LoginAction {
 				return "success";
 			} else if (users == null) {
 				blacklistsService.logErrCount(ip);
-				error = "{\"message\":\"用户名或者密码不正确\"}";
+				result = "{\"message\":\"用户名或者密码不正确\"}";
 				return "success";
 			}
 		}
@@ -232,11 +232,4 @@ public class LoginAction {
 		this.result = result;
 	}
 
-	public String getError() {
-		return error;
-	}
-
-	public void setError(String error) {
-		this.error = error;
-	}
 }

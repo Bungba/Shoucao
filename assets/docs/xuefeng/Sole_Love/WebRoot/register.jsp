@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'zhuce.jsp' starting page</title>
+<title>用户注册</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -52,7 +52,7 @@
 				//alert(data);  
 				var member = eval("(" + data + ")"); //包数据解析为json 格式    
 
-				$('#result').html("欢迎您：  " + User.name);
+				$('#result').html("欢迎您：  " + member.name);
 
 			},
 
@@ -83,7 +83,7 @@
 <span>验证码：</span>
 	<input type="text" name="rand" id="rand">
 	<br />
-	<input type="button" id="btn_login" value="zhuce" />
-
+	<input type="button" id="btn_login" value="注册" />
+<a href="index.jsp">首页</a>
 </body>
 </html>
