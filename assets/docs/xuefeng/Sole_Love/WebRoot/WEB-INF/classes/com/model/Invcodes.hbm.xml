@@ -10,22 +10,22 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="code" type="java.lang.String">
+        <property name="code" type="java.lang.String" update="false">
             <column name="code" length="50">
                 <comment>邀请码</comment>
             </column>
         </property>
-        <property name="sid" type="java.lang.Integer">
+        <property name="sid" type="java.lang.Integer" update="false">
             <column name="sid">
                 <comment>首草</comment>
             </column>
         </property>
-        <property name="updatetime" type="java.sql.Timestamp">
+        <property name="updatetime" type="java.sql.Timestamp" update="false">
             <column name="updatetime" length="0">
                 <comment>更新时间</comment>
             </column>
         </property>
-        <property name="creationtime" type="java.sql.Timestamp">
+        <property name="creationtime" type="java.sql.Timestamp" update="false">
             <column name="creationtime" length="0">
                 <comment>创建时间</comment>
             </column>

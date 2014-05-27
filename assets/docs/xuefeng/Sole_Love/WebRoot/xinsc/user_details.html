@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>用户详细信息</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<link rel="stylesheet" type="text/css" href="css/user.css">
+<script type="text/javascript" src="js/hidden.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				var url = 'findUserInfo.action';
+				$.post(url,  function cbf(data) {
+					var member = eval("(" + data + ")");
+					for ( var i = 0; i < member.length; i++) {
+					
+						$("#nickname").html(member[i].nickname);
+						if (member[i].gender == 0) {
+							$("#gender").html("男");
+						} else if (member[i].gender == 1){
+							$("#gender").html("女");
+						}
+						var byear=new Date(member[i].birthday.time).getFullYear()+"年";
+						var bmonth=(new Date(member[i].birthday.time).getMonth()+1)+"月";
+						var bday=new Date(member[i].birthday.time).getDate()+"日";
+						$("#birthday").html(byear+bmonth+bday);
+						var myear=new Date(member[i].marriageday.time).getFullYear()+"年";
+						var mmonth=(new Date(member[i].marriageday.time).getMonth()+1)+"月";
+						var mday=new Date(member[i].marriageday.time).getDate()+"日";
+						$("#marriageday").html(myear+mmonth+mday);
+						$("#tel").html(member[i].tel);
+						$("#qq").html(member[i].qq);
+						$("#city").html(member[i].city);
+						$("#address").html(member[i].address);
+					}
+				}, 'json' //数据传递的类型  json  
+				);
+
+			});
+</script>
+</head>
+<body class="body">
+	<div>
+		<img src="images/account_top_bar_bg2.png" class="bg_img">
+		<div style=" margin: 10px;">
+			<table class="table">
+				<tr>
+					<td><p class="table_first_margin_top">昵称</p></td>
+					<td style="text-align: right"><span id="nickname"></span>
+					</td>
+					<td class="td_right"><a href="petname.html"><img
+							src="images/button.jpg" class="table_first_margin_top"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td>性别</td>
+					<td style="text-align: right"><span id="gender"></span>
+					</td>
+					<td class="td_right"><a href="user_sex.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td>生日</td>
+					<td style="text-align: right"><span id="birthday"></span>
+					</td>
+					<td class="td_right"><a href="user_birthday.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td><img src="images/stress.png"
+						style="vertical-align:middle;">结婚纪念日</td>
+					<td style="text-align: right"><span id="marriageday"></span>
+					</td>
+					<td style="text-align: right;"><a href="wedding_day.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td>电话</td>
+					<td style="text-align: right"><span id="tel"></span>
+					</td>
+					<td class="td_right"><a href="user_tel.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td>QQ</td>
+					<td style="text-align: right"><span id="qq"></span>
+					</td>
+					<td class="td_right"><a href="user_qq.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td>城市</td>
+					<td style="text-align: right"><span id="city"></span>
+					</td>
+					<td class="td_right"><a href="user_city.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr>
+				</tr>
+				<tr>
+					<td>地址</td>
+					<td style="text-align: right"><span id="address"></span>
+					</td>
+					<td style="text-align: right;"><a href="user_address.html"><img
+							src="images/button.jpg"> </a></td>
+				</tr>
+			</table>
+		</div>
+		<p style="text-align: center;font-size: 12px;color: #f26c4f">＊填写「生日」以及「结婚纪念日」会有精心特制的礼物哦！</p>
+	</div>
+</body>
+</html>

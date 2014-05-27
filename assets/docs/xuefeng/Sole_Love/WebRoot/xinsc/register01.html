@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>用户注册</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/register.css">
+<script type="text/javascript" src="js/hidden.js"></script>
+<script type="text/javascript">
+	function checktr_input_info(){
+		var tr=document.getElementById("tr_input_info").value;
+		if(tr==""){
+			alert("手机号不能为空");
+			return false;
+		}
+		var myreg = /^(((13[0-9]{1})|150|153|158|159|138)+\d{8})$/;
+        if(!myreg.test(tr))
+        {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+        return true;
+	}
+</script>
+</head>
+<body class="body">
+	<div class="title">
+		<p class="title_p">用户注册</p>
+	</div>
+	<div class="centre">
+		<form action="register02.html" method="get" onsubmit="return checktr_input_info();">
+			<table class="register_table">
+				<tr>
+					<td><img src="images/register_step1.png" class="step_img"></td>
+					<td><p class="please_mobile_no">请输入你的移动联系方式</p><td>
+				</tr>
+				<tr class="tr">
+					<td><p class="p_left">国家和地区</p>
+					<td><p class="p_right">中国大陆+86</p></td>
+				</tr>
+				<tr class="tr"><td colspan="2"><input name="mobile" class="tr_input_info" id="tr_input_info" type="text" placeholder='请输入手机号'></td></tr>
+				<tr><td colspan="2"><p class="explain">轻松两步注册会员,你就能在线购买我们的产品,并享受我们的各种优惠和尊贵的馈赠活动。</p></td></tr>
+				<tr><td colspan="2"><input type="submit" value="下一步" id="regeister_submit" style="width: 100%"></td></tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

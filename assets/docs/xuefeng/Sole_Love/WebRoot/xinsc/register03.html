@@ -1,0 +1,41 @@
+<html>
+<script type="text/javascript">
+	var str=location.search;
+	var values=str.substr(1);
+	var value1=values.split("&");
+		  value1=value1[0].split("=");
+	var value2=values.split("&");
+		  value2=value2[1].split("=");
+	function register02TEXT(){
+		document.getElementById("identify").value=value1[1];
+		document.getElementById("mobile").value=value2[1];
+	}
+</script>
+  <head>
+    <title>设置用户名</title>
+  	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/register.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+  </head>
+  <body class="body" onload="register02TEXT()">
+  	<div class="title">
+		<p class="title_p">用户注册</p>
+	</div>
+	<div class="centre">
+		<form action="account.html">
+		<input style="display: none;" type="text" id="identify" name="identify">
+		<input style="display: none;" type="text" id="mobile" name="mobile">
+				<table class="register_table">
+					<tr>
+						<td><img src="images/register_step2.png" class="step_img"></td>
+						<td style="margin-left: 5px"><p style="text-align: left; color:#c79a6f;font-size: 23px">设置你的会员名</p><td>
+					</tr>
+					<tr style="background-color: #f6f6f6;height: 50px;"><td colspan="2"><input class="tr_input_info" type="text" placeholder="请输入你的会员名"></td></tr>
+					<tr><td colspan="2"><p style="text-align: center; color:#f26c4f">5-25字符,一个汉字占两个字符。</p></td></tr>
+					<tr><td colspan="2" style="width: 100%"><input type="submit" value="下一步" id="regeister_submit"></td></tr>
+				</table>
+		</form>
+	</div>
+  </body>
+</html>

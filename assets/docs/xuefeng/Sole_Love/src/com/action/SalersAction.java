@@ -3,6 +3,8 @@ package com.action;
 import javax.annotation.Resource;
 import javax.crypto.spec.IvParameterSpec;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -44,11 +46,13 @@ public class SalersAction {
 		if (user != null) {
 			Salers salers = salersService.findSalersInfo(user.getId());
 			JSONObject jo = JSONObject.fromObject(salers);
-			result = jo.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(jo.toString());
+			sb.append("[{\"message\":\"无错误\"}]");
+			result=sb.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 
@@ -80,11 +84,13 @@ public class SalersAction {
 			JSONArray ja = new JSONArray();
 			ja.add(user);
 			ja.add(salers);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("[{\"message\":\"无错误\"}]");
+			result=sb.toString();
 			return "success";
 		}
-		result = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 	
@@ -93,12 +99,12 @@ public class SalersAction {
 				.getAttribute("User");
 		if (user!=null) {
 			if (salersService.findInvcodesInfo(invcodes)) 
-				result="{\"message\":\"邀请码可用\"}";
+				result="[{\"message\":\"资格号可用\",\"ble\":\"0\"}]";
 			else
-				result="{\"message\":\"邀请码不可用\"}";
+				result="[{\"message\":\"资格号不可用\",\"ble\":\"1\"}]";
 			return "success";
 		}
-		result = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 	

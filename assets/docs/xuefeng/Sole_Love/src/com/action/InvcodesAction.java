@@ -2,6 +2,8 @@ package com.action;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -28,10 +30,10 @@ public class InvcodesAction {
 
 	public String findInvcodesInfo() {
 		if (invcodesService.findInvcodesInfo(invcodes)) {
-			error = "{\"message\":\"无错误\"}";
+			result = "{\"message\":\"无错误\"}";
 			return "success";
 		} else {
-			error = "{\"message\":\"邀请码无效\"}";
+			result = "{\"message\":\"邀请码无效\"}";
 			return "success";
 		}
 

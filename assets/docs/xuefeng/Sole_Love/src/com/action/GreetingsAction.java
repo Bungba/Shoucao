@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
@@ -38,20 +40,22 @@ public class GreetingsAction {
 			List<Greetings> list = greetingsService.findGreetingsInfo(user
 					.getId());
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("{\"message\":\"无错误\"}");
+			result=sb.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "{\"message\":\"用户未登录\"}";
 		return "success";
 	}
 
 	/**
 	 * 新建祝福
 	 */
-	String char_id;
-	String bg_id;
-	String sound;
+	String char_id;//动画
+	String bg_id;//背景
+	String sound;//声音
 
 	public String addGreetingInfo() {
 		Users user = (Users) ServletActionContext.getRequest().getSession()
@@ -60,11 +64,13 @@ public class GreetingsAction {
 			List<Greetings> list=greetingsService.addGreetingInfo(user.getId(), char_id, bg_id,
 					sound);
 			JSONArray ja=JSONArray.fromObject(list);
-			result=ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("{\"message\":\"无错误\"}");
+			result=sb.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "{\"message\":\"用户未登录\"}";
 		return "success";
 	}
 

@@ -1,0 +1,203 @@
+<html>
+<head>
+    <title>首草使者申请</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/apply.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+			var url = 'findUserInfo.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				alert(data);
+				if(data){
+					var member = eval("(" + data + ")");
+					for(var i=0;i<member.length;i++){
+						if(member[i].code!=null){
+							alert("您已经是首草使者了");
+							window.history.go(-1);
+						}else{
+							$("#id").val(member[i].id);
+							$("#mobile").val(member[i].mobile);
+						}
+					}
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+		
+    });
+    
+    
+    $(document).ready(function() {
+    	$("#invcode").blur(function() {
+			if($("#invcode").val()==""){
+				alert("请输入资格号");
+				$("#invcode").focus();
+				return false;
+			}
+			var url = 'checkInvcodes.action';
+			var params = {
+				invcodes : $("#invcode").val(),
+			}
+			$.post(url, //服务器要接受的url  
+			params, //传递的参数       
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				if(data){
+					var member = eval("(" + data + ")");
+					for(var i=0;i<member.length;i++){
+						if(member[i].ble==1){
+							$("#invcode").focus();
+							alert(member[i].message);
+						}
+					}
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+		});
+    });
+    
+    
+    var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];    // 加权因子   
+var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];            // 身份证验证位值.10代表X   
+function IdCardValidate(idCard) { 
+    idCard = trim(idCard.replace(/ /g, ""));               //去掉字符串头尾空格                     
+    if (idCard.length == 15) {   
+        return isValidityBrithBy15IdCard(idCard);       //进行15位身份证的验证    
+    } else if (idCard.length == 18) {   
+        var a_idCard = idCard.split("");                // 得到身份证数组   
+        if(isValidityBrithBy18IdCard(idCard)&&isTrueValidateCodeBy18IdCard(a_idCard)){   //进行18位身份证的基本验证和第18位的验证
+            return true;   
+        }else {   
+            return false;   
+        }   
+    } else {   
+        return false;   
+    }   
+}   
+/**  
+ * 判断身份证号码为18位时最后的验证位是否正确  
+ * @param a_idCard 身份证号码数组  
+ * @return  
+ */  
+function isTrueValidateCodeBy18IdCard(a_idCard) {   
+    var sum = 0;                             // 声明加权求和变量   
+    if (a_idCard[17].toLowerCase() == 'x') {   
+        a_idCard[17] = 10;                    // 将最后位为x的验证码替换为10方便后续操作   
+    }   
+    for ( var i = 0; i < 17; i++) {   
+        sum += Wi[i] * a_idCard[i];            // 加权求和   
+    }   
+    valCodePosition = sum % 11;                // 得到验证码所位置   
+    if (a_idCard[17] == ValideCode[valCodePosition]) {   
+        return true;   
+    } else {   
+        return false;   
+    }   
+}   
+/**  
+  * 验证18位数身份证号码中的生日是否是有效生日  
+  * @param idCard 18位书身份证字符串  
+  * @return  
+  */  
+function isValidityBrithBy18IdCard(idCard18){   
+    var year =  idCard18.substring(6,10);   
+    var month = idCard18.substring(10,12);   
+    var day = idCard18.substring(12,14);   
+    var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+    // 这里用getFullYear()获取年份，避免千年虫问题   
+    if(temp_date.getFullYear()!=parseFloat(year)   
+          ||temp_date.getMonth()!=parseFloat(month)-1   
+          ||temp_date.getDate()!=parseFloat(day)){   
+            return false;   
+    }else{   
+        return true;   
+    }   
+}   
+  /**  
+   * 验证15位数身份证号码中的生日是否是有效生日  
+   * @param idCard15 15位书身份证字符串  
+   * @return  
+   */  
+  function isValidityBrithBy15IdCard(idCard15){   
+      var year =  idCard15.substring(6,8);   
+      var month = idCard15.substring(8,10);   
+      var day = idCard15.substring(10,12);   
+      var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));   
+      // 对于老身份证中的你年龄则不需考虑千年虫问题而使用getYear()方法   
+      if(temp_date.getYear()!=parseFloat(year)   
+              ||temp_date.getMonth()!=parseFloat(month)-1   
+              ||temp_date.getDate()!=parseFloat(day)){   
+                return false;   
+        }else{   
+            return true;   
+        }   
+  }   
+//去掉字符串头尾空格   
+function trim(str) {   
+    return str.replace(/(^\s*)|(\s*$)/g, "");   
+}
+    
+    
+    
+    	$(document).ready(function() {
+		$("#affirm_submit").click(function() {
+			if($("#idcode").val()==""){
+				alert("请输入身份证号");
+				$("#idcode").focus();
+				return false;
+			}else{
+				if(!IdCardValidate($("#idcode").val())){
+					alert("请输入正确的身份证号");
+					$("#idcode").focus();
+					return false;
+				}
+			}
+			var url = 'wxApplySaler.action';
+			var params = {
+				id : $("#id").val(),
+				invcodes : $("#invcode").val(),
+				mobile : $("#mobile").val(),
+				idcode : $("#idcode").val(),
+				address : $("#address").val(),
+			}
+			$.post(url, //服务器要接受的url  
+			params, //传递的参数       
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				if(data){
+					alert("申请成功！")
+					setTimeout("window.location.href = 'user_details.html'",1500);
+				}else{
+					alert("申请失败")
+					setTimeout("window.location.href = 'petname.html'",1500);
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+		});
+	});
+    </script>
+</head>
+<body id="lload">
+<div class="big_title">
+    <p class="title_p">申请首草使者</p>
+</div>
+<div class="bg">
+    <div class="container2">
+           <div class="contents">
+             		<input type="text" id="id" style="display: none;">
+                   <div style="margin-bottom: 0.3em"><sup>*</sup>&nbsp;资格号<br><span>&nbsp;&nbsp;&nbsp;拨打400-187-2727热线并在当面签约时领取该号</span></div>
+                   <input class="input_info" type="text" id="invcode" >
+                   <div class="info_apply"><sup>*</sup>&nbsp;身份证号</div>
+                   <input class="input_info" id="idcode" type="text">
+                   <div class="info_apply">手机号</div>
+                   <input class="input_info" type="text" id="mobile">
+                   <div class="info_apply">联系地址</div>
+                   <textarea rows="4" class="text_area" id="address"></textarea>
+                   <input type="submit" value="确认" id="affirm_submit" >
+               
+           </div>
+    </div>
+</div>
+</body>
+</html>

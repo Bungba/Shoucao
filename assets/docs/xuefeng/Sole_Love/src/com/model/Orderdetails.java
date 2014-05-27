@@ -2,95 +2,107 @@ package com.model;
 
 import java.sql.Timestamp;
 
+
 /**
  * Orderdetails entity. @author MyEclipse Persistence Tools
  */
 
-public class Orderdetails implements java.io.Serializable {
+public class Orderdetails  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer id;
-	private Integer oid;
-	private Integer pid;
-	private Float price;
-	private Integer count;
-	private Timestamp updatetime;
-	private Timestamp creationtime;
+    // Fields    
 
-	// Constructors
+     private Integer id;
+     private Integer oid;
+     private Integer pid;
+     private Float price;
+     private Integer count;
+     private Timestamp updatetime;
+     private Timestamp creationtime;
 
-	/** default constructor */
-	public Orderdetails() {
-	}
 
-	/** full constructor */
-	public Orderdetails(Integer oid, Integer pid, Float price, Integer count,
-			Timestamp updatetime, Timestamp creationtime) {
-		this.oid = oid;
-		this.pid = pid;
-		this.price = price;
-		this.count = count;
-		this.updatetime = updatetime;
-		this.creationtime = creationtime;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public Orderdetails() {
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    
+    /** full constructor */
+    public Orderdetails(Integer oid, Integer pid, Float price, Integer count, Timestamp updatetime, Timestamp creationtime) {
+        this.oid = oid;
+        this.pid = pid;
+        this.price = price;
+        this.count = count;
+        this.updatetime = updatetime;
+        this.creationtime = creationtime;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+   
+    // Property accessors
 
-	public Integer getOid() {
-		return this.oid;
-	}
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setOid(Integer oid) {
-		this.oid = oid;
-	}
+    public Integer getOid() {
+        return this.oid;
+    }
+    
+    public void setOid(Integer oid) {
+        this.oid = oid;
+    }
 
-	public Integer getPid() {
-		return this.pid;
-	}
+    public Integer getPid() {
+        return this.pid;
+    }
+    
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
+    public Float getPrice() {
+        return this.price;
+    }
+    
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 
-	public Float getPrice() {
-		return this.price;
-	}
+    public Integer getCount() {
+        return this.count;
+    }
+    
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
-	public void setPrice(Float price) {
-		this.price = price;
-	}
+    public Timestamp getUpdatetime() {
+        return this.updatetime;
+    }
+    
+    public void setUpdatetime(Timestamp updatetime) {
+        this.updatetime = updatetime;
+    }
 
-	public Integer getCount() {
-		return this.count;
-	}
+    public Timestamp getCreationtime() {
+        return this.creationtime;
+    }
+    
+    public void setCreationtime(Timestamp creationtime) {
+        this.creationtime = creationtime;
+    }
+   
 
-	public void setCount(Integer count) {
-		this.count = count;
-	}
 
-	public Timestamp getUpdatetime() {
-		return this.updatetime;
-	}
 
-	public void setUpdatetime(Timestamp updatetime) {
-		this.updatetime = updatetime;
-	}
 
-	public Timestamp getCreationtime() {
-		return this.creationtime;
-	}
 
-	public void setCreationtime(Timestamp creationtime) {
-		this.creationtime = creationtime;
-	}
+
+
 
 }

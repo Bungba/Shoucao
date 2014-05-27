@@ -2,6 +2,7 @@ package com.dao;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

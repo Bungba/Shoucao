@@ -1,10 +1,12 @@
 package com.util;
 
 import java.security.MessageDigest;
+import javax.persistence.Entity;
 
 /**
  * ≤…”√MD5º”√‹
  */
+@Entity
 public class MD5Util {
 
 	/***

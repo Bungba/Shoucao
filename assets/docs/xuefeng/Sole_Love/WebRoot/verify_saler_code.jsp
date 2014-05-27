@@ -24,7 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(document).ready(function() {
 		$("#btn_login").click(function() {
 			var url = 'verify_saler_code.action';
+			var params = {
+				verify : $("#verify").val(),
+			}
 			$.post(url, //服务器要接受的url  
+			params,
 			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
 				data = data.replace("[", "").replace("]", "");
 				data = data.replace("[", "").replace("]", "");
@@ -39,7 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <input type="button" id="btn_login" value="Login" />
+  优惠代码：<input type="text" id="params" name="params"><br />
+   <input type="button" id="btn_login" value="测试" />
 	<span id="result"></span>
   </body>
 </html>

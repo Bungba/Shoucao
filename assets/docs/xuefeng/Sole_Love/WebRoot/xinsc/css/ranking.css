@@ -1,0 +1,121 @@
+@CHARSET "UTF-8";
+.body{
+    background-color: #f7f8f8;
+    width: 100%;
+    margin: 0px;
+}
+
+.bg_img{
+    width: 100%;
+}
+.div_bg{
+    height: auto;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+}
+table.table{
+    color: #868686;
+    margin-bottom: 5px;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    padding-bottom: 0.4em;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -o-border-radius:8px;
+    width: 100%;
+    border: 1px solid #ebebeb;
+    background-color:#ffffff;
+}
+.table_first_margin_top{
+    margin-top: 10px;
+}
+.td_right{
+    text-align: right;
+}
+.account_head_table{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+div.uname
+{
+    color: white;
+    font-size: 1.5em;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 2;
+    top: 4%;
+    left: 45%;
+}
+div.paiming
+{
+    color: white;
+    font-size: 1.5em;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 2;
+    top: 12%;
+    left: 45%;
+}
+
+div.container
+{
+    color: #898989;
+    background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+    background:-ms-linear-gradient( top, #ffffff 5%, #ffffff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff');
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #ffffff), color-stop(100%, #ffffff) );
+    border-radius:5px;
+    border: 1px solid #ebebeb;
+    background-color: #ffffff;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 0;
+    margin-bottom: 0.5em;
+}
+
+
+div.box
+{
+    padding-right: 1.5em;
+    padding-left: 1em;
+    height: 3em;
+}
+
+div.even_box
+{
+    padding-right: 1.5em;
+    padding-left: 1em;
+    height: 3em;
+    background-color: #f9f9f9;
+}
+div.box_content
+{
+    width: 100%;
+    height: 100%;
+    line-height: 3em;
+}
+div.left
+{
+    float: left;
+    width: 40%;
+}
+
+div.names
+{
+    float: right;
+    text-align: left;
+    width: 50%;
+}
+div.money
+{
+    float: right;
+    width: 30%;
+    text-align: left;
+}
+#title
+{
+    color: #acacac;
+}

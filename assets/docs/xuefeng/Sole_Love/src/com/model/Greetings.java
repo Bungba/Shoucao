@@ -93,12 +93,4 @@ public class Greetings implements java.io.Serializable {
 		this.creationtime = creationtime;
 	}
 
-	@Override
-	public String toString() {
-		return "Greetings [id=" + id + ", charactor=" + charactor
-				+ ", background=" + background + ", sound=" + sound + ", code="
-				+ code + ", updatetime=" + updatetime + ", creationtime="
-				+ creationtime + "]";
-	}
-	
 }

@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+#zhengwen{
+    margin: 0 auto;
+	color: #868686;
+	font-size: 1.2em;
+	width: 88%;
+    line-height: 1.5;
+}
+hr{
+	 height:1px;
+	 border:none;
+	 border-top:1px dashed #C8C8C8;
+}
+div.story_title
+{
+    font-size: 26px;
+    text-align: center;
+    color: #c49a6c;
+}

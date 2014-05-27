@@ -2,11 +2,16 @@ package com.action;
 
 import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -84,7 +89,7 @@ public class LoginAction {
 					users = usersService.login(ip, null, email, md);
 				}
 				if (users != null) {
-					System.out.println("Login---------111------>users != null");
+					//System.out.println("Login---------111------>users != null");
 					Salers salers = salersService.findSalersInfo(users.getId());// 首草使者信息
 					ServletActionContext.getRequest().getSession()
 							.setAttribute("User", users);
@@ -96,6 +101,7 @@ public class LoginAction {
 					ja.add(users);
 					ja.add(salers);
 					result = ja.toString();
+					
 					return "success";
 				} else if (users == null) {
 					blacklistsService.logErrCount(ip);
@@ -150,7 +156,7 @@ public class LoginAction {
 					.removeAttribute("User");// 将session中的用户信息清除
 			return "success";
 		}
-		return "error";
+		return "success";
 	}
 
 	/**

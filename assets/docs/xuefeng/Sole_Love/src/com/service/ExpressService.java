@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.springframework.stereotype.Repository;
 
 import com.dao.ExpressDao;

@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>验证手机</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/register.css">
+<script type="text/javascript" src="js/hidden.js"></script>
+<script type="text/javascript">
+	var Time = 60, t;
+	var c = Time
+	function timedCount() {
+		document.getElementById('vaildation').value = "请稍等";
+		document.getElementById('vaildation').disabled = "disabled";
+		c = c - 1;
+		document.getElementById("daojishi").innerHTML=c+"'S";
+		t = setTimeout("timedCount()", 1000)
+		if (c < 0) {
+			c = Time;
+			stopCount();
+			document.getElementById('vaildation').value = "发送校验码";
+			document.getElementById("daojishi").innerHTML="";
+			document.getElementById('vaildation').removeAttribute("disabled");
+		}
+	}
+	function stopCount() {
+		clearTimeout(t);
+	}
+	var str=location.search;
+	str=str.substr(1);
+	str=str.split("&");
+	str=str[0].split("=");
+	function register01TEXT(){
+		document.getElementById("mobile").value=str[1];
+	}
+</script>
+</head>
+<body class="body" onload="register01TEXT()">
+
+	<div class="title">
+		<p class="title_p">用户注册</p>
+	</div>
+	<div class="centre">
+		<form action="register03.html">
+			<table class="register_table">
+				<tr><td class="validation" colspan="3"><p class="validation_p">验证码已经发送到</p></td></tr>
+				<tr><td colspan="3" class="echo_mobile_phone"><p style="color:#868686;font-size: 1.2em">123456789987</p></td></tr>
+				<tr>
+					<td style="background:#f6f6f6;"><input name="identify"  class="tr_input_info" type="text" value="123321"></td>
+					<td style="width: 20%"><span id="daojishi" style="color: #f26c4f"></span></td>
+					<td style="text-align: right;width: 40%;"><input type="button"  onclick="timedCount()" value="重发验证码" id="vaildation"></td>
+				</tr>
+				<tr><td colspan="3">
+					<input style="display: none;" type="text" name="mobile" id="mobile" readonly="readonly">
+				<input type="submit" value="下一步" id="regeister_submit"></td></tr>
+			</table>				
+		</form>
+	</div>
+</body>
+</html>

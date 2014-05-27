@@ -61,6 +61,7 @@
 				<value>com/model/Salers.hbm.xml</value>
 				<value>com/model/Usergreetings.hbm.xml</value>
 				<value>com/model/Greetings.hbm.xml</value>
+				<value>com/model/Html.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -71,19 +72,9 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<context:component-scan base-package="*" />
- 
-<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="" />
-    <property name="suffix" value=".jsp" />
-</bean>
-
+	
 	<task:executor id="executor" pool-size="5" />
 	<task:scheduler id="scheduler" pool-size="10" />
-	<task:annotation-driven executor="executor"
-		scheduler="scheduler" />
-
-
-
-	
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
 
 </beans>

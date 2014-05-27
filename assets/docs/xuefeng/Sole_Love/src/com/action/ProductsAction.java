@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 
 import org.springframework.context.annotation.Scope;
@@ -26,8 +28,8 @@ public class ProductsAction {
 	public String findProductInfo() {
 		List<Products> list = productsService.findProductsInfo();
 		JSONArray ja = JSONArray.fromObject(list);
-		result = ja.toString();
-		error = "{\"message\":\"ÎÞ´íÎó\"}";
+		result=ja.toString();
+		System.out.println(result);
 		return "success";
 	}
 

@@ -3,50 +3,55 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+<!-- 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="false" />
-	<constant name="struts.ui.theme" value="simple"></constant>
-	
+	<constant name="struts.multipart.maxSize" value="2073741824" /> -->
 	<package name="default" namespace="/" extends="struts-default,json-default">
-		
-		<action name="index" >
-			<result >index.jsp</result>
+
+		<action name="index">
+			<result>index.jsp</result>
 		</action>
-		
+
 		<!-- 产品列表 -->
 		<action name="products" class="productsAction" method="findProductInfo">
-			<result type="json">  
-                <!-- root的值对应要返回的值的属性 -->  
-                <!-- 这里的result值即是 对应action中的 result -->  
-                <param name="root">result</param>  
-            </result> 
-		</action>
-	
-		
-		<!-- 用户注册 -->
-		<action name="register" class="usersAction" method="addUserInfo">
-			<result type="json">  
-                <!-- root的值对应要返回的值的属性 -->  
-                <!-- 这里的result值即是 对应action中的 result -->  
-                <param name="root">result</param>  
-            </result> 
-		</action>
-		
-		<!-- 验证手机或者邮箱是否存在 -->
-		<action name="check_email_or_mobile_existed" class="loginAction"
-			method="check_email_or_mobile_existed">
-			<result type="json">  
-                <param name="root">result</param>  
-            </result> 
-		</action>
-		
-		<!-- 验证 验证码 -->
-		<action name="checkId" class="usersAction" method="checkIdentifie">
 			<result type="json">
-				<param name="root">error</param>  
+				<!-- root的值对应要返回的值的属性 -->
+				<!-- 这里的result值即是 对应action中的 result -->
+				<param name="root">result</param>
 			</result>
 		</action>
 		
+
+		<!-- 用户注册 -->
+		<action name="register" class="usersAction" method="addUserInfo">
+			<result type="json">
+				<!-- root的值对应要返回的值的属性 -->
+				<!-- 这里的result值即是 对应action中的 result -->
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 用户信息-->
+		<action name="findUserInfo" class="usersAction" method="findUsersInfo">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 验证手机或者邮箱是否存在 -->
+		<action name="check_email_or_mobile_existed" class="loginAction"
+			method="check_email_or_mobile_existed">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 验证 验证码 -->
+		<action name="checkId" class="usersAction" method="checkIdentifie">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
 		<!-- 验证码 -->
 		<action name="identifie" class="loginAction" method="identifieCode">
 			<result type="stream">
@@ -54,153 +59,330 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
-		
-		<!-- 	login -->
+
+		<!-- login -->
 		<action name="login" class="loginAction" method="login">
-			<result name="success">index.jsp</result>
-			<result name="error">MyJsp.jsp</result>
+			<result type="json">
+				<param name="root">result</param>
+			</result>
 		</action>
-		
-		<!-- 	logout -->
+
+		<!-- logout -->
 		<action name="logout" class="loginAction" method="logOut">
 			<result name="success">index.jsp</result>
 			<result name="input">MyJsp.jsp</result>
 		</action>
-		
-		<!-- 	取得当前用户的配送地址列表-->
+
+		<!-- 取得当前用户的配送地址列表 -->
 		<action name="addresses" class="addressAction" method="findAddInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	添加配送地址-->
+
+		<!-- 添加配送地址 -->
 		<action name="add_address" class="addressAction" method="addAddressInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	修改配送地址-->
+
+		<!-- 修改配送地址 -->
 		<action name="update_address" class="addressAction" method="updateAddressInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	删除配送地址-->
+
+		<!-- 删除配送地址 -->
 		<action name="del_address" class="addressAction" method="delAddressInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	提交订单-->
+
+		<!-- 提交订单 -->
 		<action name="submit_order" class="ordersAction" method="addOrdersInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	用户所用订单-->
+
+		<!-- 用户所用订单 -->
 		<action name="all_order" class="ordersAction" method="findAllOrdersInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	配送方式列表-->
+
+		<!-- 配送方式列表 -->
 		<action name="expresses" class="expressesAction" method="findExpressInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	取得当前user使用过的祝福列表 -->
+		<!-- 取得当前user使用过的祝福列表 -->
 		<action name="greetings" class="greetingsAction" method="findGreetingInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	创建祝福-->
+		<!-- 创建祝福 -->
 		<action name="create_greeting" class="greetingsAction" method="addGreetingInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	首草使者信息-->
+
+		<!-- 首草使者信息 -->
 		<action name="salerInfo" class="salersAction" method="findSalersInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	查询邀请码是否使用-->
+		<!-- 查询邀请码是否使用 -->
 		<action name="checkInvcodes" class="salersAction" method="findInvcodesInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	注册首草使者-->
+		<!-- 注册首草使者 -->
 		<action name="registerSaler" class="salersAction" method="addSalersInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	查询站内信-->
+
+		<!-- 查询站内信 -->
 		<action name="message" class="messagesAction" method="findMsgInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	读站内信-->
+		<!-- 读站内信 -->
 		<action name="readMes" class="messagesAction" method="readMesInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	删除站内信-->
+		<!-- 删除站内信 -->
 		<action name="delMsg" class="messagesAction" method="delMsgInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	使者等级机制-->
+
+		<!-- 使者等级机制 -->
 		<action name="salerlevels" class="salerlevelsAction" method="findSalerlevelsInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		<!-- 	当前用户使者等级-->
-		<action name="usersalerlevels" class="salerlevelsAction" method="userSalerLevel">
+		<!-- 当前用户使者等级 -->
+		<action name="usersalerlevels" class="salerlevelsAction"
+			method="userSalerLevel">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	使者排行榜-->
+
+		<!-- 使者排行榜 -->
 		<action name="rankings" class="rankingsAction" method="findRankingInfo">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 	优惠代码验证-->
+
+		<!-- 优惠代码验证 -->
 		<action name="verify_saler_code" class="infosAction" method="checkVerify">
 			<result type="json">
-				<param name="root">result</param>  
+				<param name="root">result</param>
 			</result>
 		</action>
-		
-		<!-- 返点记录-->
-		<action name="discounts" class="discountsAction" method="findDisInfo">
-			<result type="json">
-				<param name="root">result</param>  
-			</result>
-		</action>
-		
-		
-	</package>
 
+		<!-- 返点记录 -->
+		<action name="discounts" class="discountsAction" method="findMonthDisInfo">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="yearDiscounts" class="discountsAction" method="findYearDisInfo">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="monthDiscounts" class="discountsAction" method="findMonthOrders">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+
+		<!-- backstage -->
+
+		<action name="order" class="bs.action.BsOrdersAction" method="findAllOrdersInfo">
+			<result name="success">
+				backstage/all_orders.jsp
+			</result>
+		</action>
+
+		<action name="usermess" class="bs.action.BsUserAction" method="findUsers">
+			<result name="success">
+				backstage/userMessage.jsp
+			</result>
+		</action>
+		<action name="updateUser" class="bs.action.BsUserAction"
+			method="updateUsers">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="addUser" class="bs.action.BsUserAction" method="addUsers">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="updateUserFlag" class="bs.action.BsUserAction" method="updateUserFlag">
+			<result type="redirectAction" name="success">
+				usermess
+			</result>
+		</action>
+		
+		<action name="productsmess" class="bs.action.BsProductsAction"
+			method="findProducts">
+			<result name="success">
+				backstage/productsMessage.jsp
+			</result>
+		</action>
+
+		<action name="updateproduct" class="bs.action.BsProductsAction"
+			method="updateproducts">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="delProduct" class="bs.action.BsProductsAction"
+			method="delproducts">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+
+		<action name="greetingMess" class="bs.action.BsGreetingsAction"
+			method="findGreeting">
+			<result name="success">
+				backstage/greetingMessage.jsp
+			</result>
+		</action>
+		
+		<action name="updateGreeting" class="bs.action.BsGreetingsAction" method="updateGreeting">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/pjpeg,audio/mpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<param name="savePath">/greetingInfo</param>
+			<result type="redirectAction" name="success">
+				greetingMess
+			</result>
+		</action>
+		
+		
+
+		<action name="news" class="bs.action.BsNews" method="findHTMLCode">
+			<result name="success">
+				backstage/findNews.jsp
+			</result>
+		</action>
+
+		<action name="findNews" class="bs.action.BsNews" method="findHTMLContent">
+			<result name="success">
+				backstage/newsContent.jsp
+			</result>
+		</action>
+		<action name="updateNews" class="bs.action.BsNews" method="findHTMLContent">
+			<result name="success">
+				backstage/updateHTML.jsp
+			</result>
+		</action>
+		<action name="addNews" class="bs.action.BsNews" method="addHTMLCode">
+			<result type="redirectAction" name="success">
+				news
+			</result>
+		</action>
+
+		<action name="updateHtml" class="bs.action.BsNews" method="updateHTML">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="imgDel" class="bs.action.BsNews" method="imgDelete">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		
+		<action name="GreetingsUpload" class="bs.action.BsGreetingsAction"
+			method="upLoad">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/pjpeg,audio/mpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<param name="savePath">/greetingInfo</param>
+			<result name="input">/index.jsp</result>
+			<result>backstage/succ.jsp</result>
+		</action>
+		
+		
+		<action name="selectGreeting" class="bs.action.BsGreetingsAction" method="findGreetingInfo">
+			<result name="success">
+				backstage/selectGreeting.jsp
+			</result>
+		</action>
+		
+		<action name="updateFlag" class="bs.action.BsOrdersAction" method="updateOrdersFlag">
+			<result type="redirectAction" name="success">
+				order
+			</result>
+		</action>
+	
+
+
+	<!-- 微信 -->
+	
+		<action name="wxUpdateUser" class="bs.action.BsUserAction" method="wxUpdateUser">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="wxApplySaler" class="bs.action.BsUserAction" method="wxApplySaler">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="wxResetPassword" class="bs.action.BsUserAction" method="wxResetPassword">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="wxfindUserOrders" class="bs.action.BsOrdersAction" method="findUserOrders">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="wxAddress" class="bs.action.BsAddressAction" method="wxAddress">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="wxRankings" class="com.action.RankingsAction" method="findUserRank">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		</package>
 </struts>

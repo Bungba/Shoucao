@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>修改昵称</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/user_qq.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+		$("#sub_confirm").click(function() {
+			var url = 'wxUpdateUser.action';
+			var params = {
+				nickname : $("#nickname").val(),
+			}
+			$.post(url, //服务器要接受的url  
+			params, //传递的参数       
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				if(data){
+					alert("修改成功！")
+					setTimeout("window.location.href = 'user_details.html'",1500);
+				}else{
+					alert("修改失败")
+					setTimeout("window.location.href = 'petname.html'",1500);
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+		});
+	});
+    </script>
+</head>
+<body>
+
+<div class="big_title">
+    <p class="title_p">昵称</p>
+</div>
+<div style="width: 100%;text-align: center;margin-top: 1em">
+    <input type="text" class="input" id="nickname">
+    <div style="margin-top: 1em"><input type="button" id="sub_confirm" value="保存"></div>
+</div>
+</body>
+</html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,14 +28,14 @@ public class OrdersDao {
 	 * @return
 	 */
 	@Transactional
-	public List<Orders> addOrdersInfo(Orders orders) {
+	public Orders addOrdersInfo(Orders orders) {
 		Session session = sessionFactory.getCurrentSession();
 		Integer sb = (Integer) session.save(orders);
 		if (sb != null) {
 			Query query = session.createQuery("from Orders where id=?");
 			query.setInteger(0, sb);
-			List<Orders> list = query.list();
-			return list;
+			Orders orders2 =(Orders) query.uniqueResult();
+			return orders2;
 		}
 		return null;
 	}

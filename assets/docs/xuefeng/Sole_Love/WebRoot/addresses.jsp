@@ -105,7 +105,7 @@
 </head>
 
 <body>
-	<input type="button" id="btn_login" value="Login" />
+	<input type="button" id="btn_login" value="测试" />
 	<br />
 	<span id="result"></span>
 

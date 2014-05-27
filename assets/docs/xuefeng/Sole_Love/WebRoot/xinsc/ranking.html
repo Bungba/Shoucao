@@ -1,0 +1,149 @@
+<html>
+<head>
+    <title>排行榜</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/ranking.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			var url = 'rankings.action';
+			$.post(url, 
+				function cbf(data) {
+					var member = eval("(" + data + ")");
+					var name="";
+					for(var i=0;i<member.length;i++){
+						name+=member[i].name+"     ";
+					}
+				}, 'json' 
+			);
+		});
+		$(document).ready(function() {
+			var url = 'wxRankings.action';
+			$.post(url, 
+				function cbf(data) {
+					var member = eval("(" + data + ")");
+					$("#uname").html(member[0].name);
+					$("#paiming").html(member[1].message);
+				}, 'json' 
+			);
+		});
+    </script>
+</head>
+<body class="body">
+<div>
+    <img src="images/paihang_bg.jpg" class="bg_img">
+    <div class="uname" id="uname">
+       
+    </div>
+    <div class="paiming">
+        我的排名&nbsp;<span id="paiming"></span>
+    </div>
+    <div class="div_bg">
+        <div class="box">
+            <div  class="box_content" id="title">
+                <div class="left">
+                    <div style="float: left">名次</div>
+                    <div class="names">用户名</div>
+                </div>
+                <div class="money">销售额</div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div  class="box_content">
+                    <div class="left">
+                        <div style="float: left">1</div>
+                        <div class="names">Gloria</div>
+                    </div>
+                    <div class="money">¥1000,000</div>
+                </div>
+            </div>
+            <div class="even_box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">2</div>
+                        <div  class="names">James</div>
+                    </div>
+                    <div class="money">¥900,000</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">3</div>
+                        <div  class="names">Emily</div>
+                    </div>
+                    <div class="money">¥800,000</div>
+                </div>
+            </div>
+            <div class="even_box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">4</div>
+                        <div  class="names">Gloria</div>
+                    </div>
+                    <div class="money">¥700,000</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">5</div>
+                        <div  class="names">Eva</div>
+                    </div>
+                    <div class="money">¥600,000</div>
+                </div>
+            </div>
+            <div class="even_box">
+            <div class="box_content">
+                <div class="left">
+                    <div style="float: left">6</div>
+                    <div  class="names">Tmoy</div>
+                </div>
+                <div class="money">¥500,000</div>
+            </div>
+        </div>
+            <div class="box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">7</div>
+                        <div  class="names">Emily</div>
+                    </div>
+                    <div class="money">¥400,000</div>
+                </div>
+            </div>
+            <div class="even_box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">8</div>
+                        <div  class="names">Joe.Cai</div>
+                    </div>
+                    <div class="money">¥300,000</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">9</div>
+                        <div  class="names">James</div>
+                    </div>
+                    <div class="money">¥200,000</div>
+                </div>
+            </div>
+
+            <div class="even_box">
+                <div class="box_content">
+                    <div class="left">
+                        <div style="float: left">10</div>
+                        <div  class="names">James</div>
+                    </div>
+                    <div class="money">¥100,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

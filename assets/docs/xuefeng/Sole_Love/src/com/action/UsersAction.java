@@ -1,14 +1,14 @@
 package com.action;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.Timestamp;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JSONString;
-import net.sf.json.util.JSONStringer;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +19,7 @@ import com.model.Users;
 import com.service.SalersService;
 import com.service.UsersService;
 import com.util.MD5Util;
+import com.util.VaildatorUtil;
 
 @Controller
 @Scope("prototype")
@@ -53,11 +54,10 @@ public class UsersAction {
 			JSONArray jo = new JSONArray();
 			jo.add(u);
 			jo.add(saler);
-			result = jo.toString();
-			error = "{\"message\":\"无错误\"}";
+			result=jo.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 
@@ -69,20 +69,33 @@ public class UsersAction {
 	String nickname;
 	String mobile;// 手机号
 	String email;// 邮箱
-	String name;
 	String password;
 	String rand;
 
 	public String addUserInfo() {
+		//System.out.println(nickname+"    "+mobile+"    "+email+"    "+password+"    "+rand);
 		Users users = new Users();
 		if (mobile != null) {
 			users.setMobile(mobile);
-			// System.out.println(users.getMobile());
-		} else if (email != null) {
+		} 
+		if (email != null) {
 			users.setEmail(email);
-			// System.out.println(users.getEmail());
 		}
-		users.setNickname(name);
+		users.setNickname(nickname);
+		users.setPassword(password);
+		users.setNickname(nickname);
+		users.setDelflag(0);
+		users.setLocked(0);
+		users.setCreationtime(new Timestamp(System.currentTimeMillis()));
+		//System.out.println(VaildatorUtil.message(users).size());
+		if (VaildatorUtil.message(users).size()!=0) {
+			//System.out.println(VaildatorUtil.message(users));//输出字段信息
+			JSONObject jo=JSONObject.fromObject(VaildatorUtil.message(users));
+			result=jo.toString();
+			return "success";
+		}
+			
+		
 		// System.out.println(users.getNickname());
 		MD5Util md5 = new MD5Util();
 
@@ -111,15 +124,16 @@ public class UsersAction {
 		// System.out.println(arandom + "          " + rand);
 		// 将session中保存验证码字符串与客户输入的验证码字符串对比了
 		if (arandom.equals(rand.toUpperCase())) {
-			error = "{\"message\":\"无错误\"}";
+			result = "{\"message\":\"无错误\"}";
 			return "success";
 		} else {
-			error = "{\"message\":\"验证码错误\"}";
+			result = "{\"message\":\"验证码错误\"}";
 			return "success";
 		}
 
 	}
 
+	
 	public UsersService getUsersService() {
 		return usersService;
 	}
@@ -135,15 +149,6 @@ public class UsersAction {
 	public void setSalersService(SalersService salersService) {
 		this.salersService = salersService;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -200,5 +205,6 @@ public class UsersAction {
 		this.nickname = nickname;
 	}
 
+	
 
 }

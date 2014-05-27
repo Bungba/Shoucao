@@ -32,12 +32,8 @@
 				data=data.replace("[", "").replace("]", "");
 				alert(data.count);
 				//var m = eval("(" + data + ")"); //包数据解析为json 格式    
-			
-				
-				$('#result').html("欢迎您：  " + data);
-
+				$('#result').html(data);
 			},
-
 			'json' //数据传递的类型  json  
 			);
 		});
@@ -46,7 +42,7 @@
 </head>
 
 <body>
-	<input type="button" id="btn_login" value="Login" />
+	<input type="button" id="btn_login" value="测试" />
 	<br /> 这里显示ajax信息：
 	<br />
 	<span id="result"></span>

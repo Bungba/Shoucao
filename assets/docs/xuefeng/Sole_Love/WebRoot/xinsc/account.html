@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <title>我的账号</title>
+  	<meta charset="utf-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  	<link rel="stylesheet" type="text/css" href="css/user.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+			var url = 'findUserInfo.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				if(data){
+					var member = eval("(" + data + ")");
+					for(var i=0;i<member.length;i++){
+						if(member[i].id==null){
+							alert("请登录");
+							window.history.go(-1);
+						}else{
+							$("#nickname").html(member[i].nickname);
+						}
+					}
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+    });
+    //站内信
+    $(document).ready(function() {
+			var url = 'message.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				var member = eval("(" + data + ")");
+				$("#megs").html(member.length);
+			
+				
+			}, 'json' //数据传递的类型  json  
+			);
+    });
+    //地址
+     $(document).ready(function() {
+		$("#wxAddress").click(function() {
+			var url = 'wxAddress.action';
+			$.post(url, 
+			function cbf(data) {
+				var member = eval("(" + data + ")");
+				var city="";
+				var address="";
+				var name="";
+				var tel="";
+				for(var i=0;i<member.length;i++){
+					city+="<span>"+member[i].city+"</span>            ";
+					address+="<span>"+member[i].address+"</span>            ";
+					name+="<span>"+member[i].name+"</span>            ";
+					tel+="<span>"+member[i].tel+"</span>            ";
+				}
+				$("#show").html("城市："+city+"<br>收货地址："+address+"<br>收货人姓名："+name+"<br>收货人电话："+tel);
+				alert($("#show").html());
+			}, 'json'
+			);
+		});
+	});
+  </script>
+  </head>
+  <body class="body">
+  									<div id="show" style="display: none;"></div>
+  	<div>
+                <img src="images/account_top_bar_bg2.png" class="bg_img">
+        <div class="uname" id="nickname">
+            
+        </div>
+
+    <table class="account_head_table">
+    	<tr>
+    		<td><a ><img id="wxAddress" src="images/accountb1.jpg" class="img1"></a></td>
+    		<td><a href=""><img src="images/accountb2.jpg" class="img1"></a></td>
+    		<td><a href=""><img src="images/accountb3.jpg" class="img1"></a></td>
+    	</tr>
+    	<tr>
+    		<td>我的收货地址</td>
+    		<td>购物车(0)</td>
+    		<td>站内通知(<span id="megs"></span>)</td>
+    	</tr>
+    	<tr>
+    		<td><a href=""><img src="images/accountb4.jpg" class="img1"></a></td>
+    		<td><a href="order_form_history.html"><img src="images/accountb5.jpg" class="img1"></a></td>
+    		<td><a href=""><img src="images/accountb6.jpg" class="img1"></a></td>
+    	</tr>
+    	<tr>
+    		<td>代付款</td>
+    		<td>已付款</td>
+    		<td>退款/售后</td>
+    	</tr>
+    </table>
+    <div class="div_bg">
+    	<table class="table">
+    		<tr><td><p class="table_first_margin_top">积分累计</p></td><td style="text-align: right;"><a href="rebate.html"><img src="images/button.jpg" class="table_first_margin_top"></a></td></tr>
+    		<tr><td colspan="2"><hr></tr>
+    		<tr><td>购买记录</td><td class="td_right"><a href="buy_record.html" ><img src="images/button.jpg"></a></td></tr>
+    		<tr><td colspan="2"><hr></tr>
+    		<tr><td>账户信息</td><td class="td_right"><a href="user_details.html"><img src="images/button.jpg"></a></td></tr>
+    		<tr><td colspan="2"><hr></tr>
+            <tr><td>账号安全</td><td class="td_right"><a href="reset_password.html"><img src="images/button.jpg"></a></td></tr>
+    	</table>
+    </div>
+    </div>
+  </body>
+</html>

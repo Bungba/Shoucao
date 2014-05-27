@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -16,7 +17,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.model.FindOrder;
 import com.model.Orderdetails;
 import com.model.Orders;
 import com.model.Products;
@@ -43,8 +43,8 @@ public class OrderdetailsDao {
 		if (oid != 0 && products.size() != 0 && count != 0) {
 			for (int i = 0; i < products.size(); i++) {
 				Orderdetails orderdetails = new Orderdetails();
-				orderdetails.setOid(oid);
-				orderdetails.setPid(products.get(i).getId());
+//				orderdetails.setOid(oid);
+//				orderdetails.setPid(products.get(i).getId());
 				orderdetails.setPrice(products.get(i).getPrice());
 				orderdetails.setCount(count);
 				Integer sb = (Integer) session.save(orderdetails);
@@ -95,6 +95,7 @@ public class OrderdetailsDao {
 			// Object[] o = (Object[]) iterator.next();
 			// System.out.println((Users)o[0]);
 			JSONArray ja=JSONArray.fromObject(list);
+			System.out.println(ja.toString());
 			return ja;
 		}
 		// System.out.println(jo.toString());

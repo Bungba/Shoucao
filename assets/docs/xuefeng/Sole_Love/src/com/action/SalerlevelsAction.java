@@ -2,6 +2,8 @@ package com.action;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
@@ -31,8 +33,10 @@ public class SalerlevelsAction {
 	public String findSalerlevelsInfo() {
 		Salerlevels salerlevels = salerlevelsService.findSalerlevelsInfo();
 		JSONObject jo = JSONObject.fromObject(salerlevels);
-		result = jo.toString();
-		error = "{\"message\":\"无错误\"}";
+		StringBuffer sb=new StringBuffer();
+		sb.append(jo.toString());
+		sb.append("{\"message\":\"无错误\"}");
+		result=sb.toString();
 		return "success";
 	}
 
@@ -49,11 +53,13 @@ public class SalerlevelsAction {
 			Salerlevels salerlevels = salerlevelsService.userSalerLevel(user
 					.getId());
 			JSONObject jo = JSONObject.fromObject(salerlevels);
-			result = jo.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(jo.toString());
+			sb.append("{\"message\":\"无错误\"}");
+			result=sb.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "{\"message\":\"用户未登录\"}";
 		return "success";
 	}
 

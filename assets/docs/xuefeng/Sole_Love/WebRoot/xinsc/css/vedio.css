@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+#bg{
+    width: 100%;
+    height: auto;
+    margin-top: 2em;
+}
+
+div.line
+{
+    border-bottom: 1px solid #e1e2e2;
+    margin-left: 3em;
+    margin-right: 3em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+div.left
+{
+    float: left;
+    width: 4em;
+    height: 4em;
+}
+div.left img
+{
+    width: 4em;
+}
+div.title
+{
+    float: left;
+    margin-left: 1.5em;
+    font-size: 1.2em;
+    color: #c49a6c;
+}

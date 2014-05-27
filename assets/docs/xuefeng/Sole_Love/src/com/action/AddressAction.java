@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -38,11 +40,10 @@ public class AddressAction {
 		if (user != null) {
 			List<Addresses> list = addressesService.findAddInfo(user.getId());
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			result=ja.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 
@@ -77,12 +78,14 @@ public class AddressAction {
 			List<Addresses> list = addressesService.addAddressInfo(
 					user.getId(), addresses);
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("[{\"message\":\"无错误\"}]");
+			result=sb.toString();
 			return "success";
 			// }
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 
@@ -114,12 +117,14 @@ public class AddressAction {
 			List<Addresses> list = addressesService.updateAddressInfo(
 					user.getId(), addresses);
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("[{\"message\":\"无错误\"}]");
+			result=sb.toString();
 			return "success";
 			// }
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 
@@ -134,16 +139,18 @@ public class AddressAction {
 				.getAttribute("User");
 		if (user != null) {
 			// if (addresses) {//判断参数是否缺失、检查参数格式是否正确
-			System.out.println(user.getId()+"----------------------"+id);
+			//System.out.println(user.getId()+"----------------------"+id);
 			List<Addresses> list = addressesService.delAddressInfo(
 					user.getId(), Integer.parseInt(id));
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("[{\"message\":\"无错误\"}]");
+			result=sb.toString();
 			return "success";
 			// }
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 

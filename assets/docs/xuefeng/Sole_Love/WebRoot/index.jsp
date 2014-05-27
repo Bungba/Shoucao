@@ -20,67 +20,24 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<script type="text/javascript" src="jquery-1.7.2.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		//使用 Ajax 的方式 判断登录  
-		$("#btn_login").click(function() {
-
-			var url = 'login.action';
-
-			alert("===");
-
-			//获取表单值，并以json的数据形式保存到params中  
-			var params = {
-				mobile : $("#mobile").val(),
-				password : $("#password").val(),
-			}
-			//使用$.post方式      
-			$.post(
-
-			url, //服务器要接受的url  
-
-			params, //传递的参数       
-
-			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
-
-				//alert(data);  
-				var member = eval("(" + data + ")"); //包数据解析为json 格式    
-
-				$('#result').html("欢迎您：  " + User.name);
-
-			},
-
-			'json' //数据传递的类型  json  
-
-			);
-
-		});
-
-	});
-</script>
 
 </head>
 
 <body>
-	<img src="identifie.action" />
-	<span>用户名：</span>
-	<input type="text" id="mobile" name="mobile">
-	<br />
 
-	<span>密码：</span>
-	<input type="password" name="password" id="password">
-	<br />
 
-	<input type="button" id="btn_login" value="Login" />
-	<br />
 	<a href="mobileAndEmail.jsp">手机邮箱验证 </a>
-	<br />
-	<a href="products.jsp">产品列表 </a>
 	<br />
 	<a href="register.jsp">用户注册 </a>
 	<br />
+	<a href="login.jsp">登陆</a>
+	<br />
+	
+	<a href="products.jsp">产品列表 </a>
+	<br />
+	<!-- <a href="submit_order.jsp">添加（提交）订单 </a>
+	<br /> -->
 	<a href="addresses.jsp">当前用户的配送地址列表 </a>
 	<br />
 	<a href="all_order.jsp">用户所用订单 </a>
@@ -89,8 +46,8 @@
 	<br />
 	<a href="greetings.jsp">当前user使用过的祝福列表 </a>
 	<br />
-	<a href="create_greeting.jsp">创建祝福 </a>
-	<br />
+	<!-- <a href="create_greeting.jsp">创建祝福 </a>
+	<br /> -->
 	<a href="salerInfo.jsp">首草使者信息 </a>
 	<br />
 	<a href="checkInvcodes.jsp">查询邀请码是否使用</a>
@@ -102,6 +59,25 @@
 	<a href="verify_saler_code.jsp">优惠代码验证 </a>
 	<br />
 	<a href="discounts.jsp">返点记录 </a>
+	<br /><br /><br /><br />
+	<a href="order.action">订单管理 </a>
 	<br />
-</body>
+	<a href="usermess.action">用户管理 </a>
+	<br />
+	<a href="productsmess.action">品牌信息管理 </a>
+	<br />
+	<a href="greetingMess.action">定制管理</a>
+	<br />
+	<a href="news.action">新闻查看</a>
+	<br />
+	<hr>
+	<a href="xinsc/register01.html">注册</a><br />
+	<a href="xinsc/user_details.html">用户信息</a><br>
+	<a href="xinsc/apply.html">首草使者申请</a><br>
+	<a href="xinsc/account.html">我的账号</a><br>
+	<a href="xinsc/ranking.html">排行榜</a><br>
+	<a href="xinsc/rebate.html">积分</a><br>
+	<a href="xinsc/sales_manage.html">积分详细</a><br>
+	<a href="xinsc/confirm_shop.html">购买</a><br>
+</body> 
 </html>

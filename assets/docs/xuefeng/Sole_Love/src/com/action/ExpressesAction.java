@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -32,7 +34,6 @@ public class ExpressesAction {
 		List<Expresses> list = expressService.findExpInfo();
 		JSONArray ja=JSONArray.fromObject(list);
 		result=ja.toString();
-		error = "{\"message\":\"ÎÞ´íÎó\"}";
 		return "success";
 	}
 

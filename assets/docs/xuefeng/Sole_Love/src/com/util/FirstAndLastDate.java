@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Entity;
 
+@Entity
 public class FirstAndLastDate {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -35,15 +37,20 @@ public class FirstAndLastDate {
 		// System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
 		return df.format(new Date());
 	}
-	
+
 	public static void main(String[] args) {
-//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
-//		System.out.println(df.format(new Timestamp(System.currentTimeMillis())));
-//		System.out.println(df.format(new Date()));
-		//String f=df.format(new Timestamp(System.currentTimeMillis())).replace(":", "").replace("-", "");
-		//String l=df.format(new Date(new Date().getTime()+600000)).replace(":", "").replace("-", "");
-//		if (Double.parseDouble(l)>Double.parseDouble(f)) {
-//			System.out.println("aaaaaaa");
-//		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		// System.out.println(df.format(new
+		// Timestamp(System.currentTimeMillis())));
+		// System.out.println(df.format(new Date()));
+		// String f=df.format(new
+		// Timestamp(System.currentTimeMillis())).replace(":", "").replace("-",
+		// "");
+		// String l=df.format(new Date(new
+		// Date().getTime()+600000)).replace(":", "").replace("-", "");
+		// if (Double.parseDouble(l)>Double.parseDouble(f)) {
+		// System.out.println("aaaaaaa");
+		// }
+		
 	}
 }

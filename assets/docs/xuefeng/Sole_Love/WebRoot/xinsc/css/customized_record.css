@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+body
+{
+    width: 100%;height: 100%;margin: 0;padding: 0;
+    background-color: #f7f8f8;
+}
+.big_title{
+    width: 100%;
+    text-align: center;
+    height:50px;
+    background-color:#f1f2f4;
+    line-height: 50px;
+    margin-bottom: 1em;
+}
+
+.title_p{
+    color: #c79a6f;
+    font-size: 28px;
+}
+
+div.container
+{
+    height:auto;
+    background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+    background:-ms-linear-gradient( top, #ffffff 5%, #ffffff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff');
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #ffffff), color-stop(100%, #ffffff) );
+    border-radius:8px;
+    border: 1px solid #ebebeb;
+    background-color: #ffffff;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 0.5em;
+}
+
+div.container img
+{
+    width: 5em;
+}
+
+div.box1
+{
+    text-align: center;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+div.box2
+{
+    text-align: center;
+    margin-bottom: 1em;
+}
+div.gou
+{
+    width: 1em;height: 1em;position: absolute;z-index: 2;
+    display: none;
+}
+div.small_box
+{
+    display: inline-block;width: 30%;
+    position: relative;
+}
+
+div.small_box img
+{
+    width: 100%;
+}
+#sub_confirm {
+    width:80%;
+    height:2.5em;
+    font-family:Arial;
+    font-weight:normal;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #c3e2d3;
+    padding:4px 10px;
+    text-decoration:none;
+    background:-moz-linear-gradient( center top, #c3e2d3 5%, #c3e2d3 100% );
+    background:-ms-linear-gradient( top, #c3e2d3 5%, #c3e2d3 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c3e2d3', endColorstr='#c3e2d3');
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #c3e2d3), color-stop(100%, #c3e2d3) );
+    background-color:#c3e2d3;
+    color:#ffffff;
+    display:inline-block;
+    text-shadow:1px 1px 0px #c3e2d3;
+    -webkit-box-shadow:inset 1px 1px 0px 0px #c3e2d3;
+    -moz-box-shadow:inset 1px 1px 0px 0px #c3e2d3;
+    box-shadow:inset 1px 1px 0px 0px #c3e2d3;
+}

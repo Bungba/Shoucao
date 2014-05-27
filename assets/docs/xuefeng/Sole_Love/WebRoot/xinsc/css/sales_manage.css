@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+body
+{
+    width: 100%;height: 100%;margin: 0;padding: 0
+}
+
+div.bg
+{
+    width:100%;
+    height: auto;
+    background-color: #f7f8f8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+div.container
+{
+    color: #898989;
+    background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+    background:-ms-linear-gradient( top, #ffffff 5%, #ffffff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff');
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #ffffff), color-stop(100%, #ffffff) );
+    border-radius:5px;
+    border: 1px solid #ebebeb;
+    background-color: #ffffff;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 0;
+}
+
+div.contents
+{
+    padding-top: 20px;
+}
+div.green_div
+{
+    width: 100%;
+    background-color: #c3e2d3;
+    text-align: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-top-left-radius: 5px;
+    border-top-right-radius:5px;
+}
+div.white_div
+{
+    width: 100%;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom:1px solid #ececec;
+}
+
+input#year
+{
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+    border: 0 ;
+    width: 3em;
+    background-color: #c3e2d3;
+}
+
+li
+{
+    color: #c8c8c8;
+    list-style-type: none;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 2em;
+    width: 2em;
+    height: 2em;
+    -webkit-border-radius:2em;
+    -moz-border-radius:2em;
+    -o-border-radius:2em;
+    border-radius:2em;
+    background-color:#f5f5f5;
+}
+input.sub_btn {
+    width: 4em;
+    font-size:16px;
+    font-family:Arial;
+    font-weight:normal;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #bedecb;
+    padding:6px 8px;
+    text-decoration:none;
+    background:-moz-linear-gradient( center top, #bedecb 5%, #bedecb 100% );
+    background:-ms-linear-gradient( top, #bedecb 5%, #bedecb 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bedecb', endColorstr='#bedecb');
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #bedecb), color-stop(100%, #bedecb) );
+    background-color:#bedecb;
+    color:#ffffff;
+    display:inline-block;
+}

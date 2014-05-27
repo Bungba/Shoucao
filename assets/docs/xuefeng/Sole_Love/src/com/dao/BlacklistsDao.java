@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -83,7 +84,6 @@ public class BlacklistsDao {
 			b.setCreationtime(new Timestamp(System.currentTimeMillis()));
 			b.setUpdatetime(new Timestamp(System.currentTimeMillis()));
 			Integer x = (Integer) session.save(b);
-			System.out.println("²»ÊÇ¿Õ");
 			return b;
 		} else {
 			return bk;

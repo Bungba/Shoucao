@@ -31,8 +31,9 @@
 				data = data.replace("[", "").replace("]", "");
 				data = data.replace("[", "").replace("]", "");
 				alert(data);
-				var member = eval("(" + data + ")"); //包数据解析为json 格式    
-				$('#result').val(member.address);
+				var member = eval("(" + data + ")"); //包数据解析为json 格式   
+				alert(member.nickname); 
+				$('#des').val(member.nickname);
 			}, 'json' //数据传递的类型  json  
 			);
 		});
@@ -42,6 +43,7 @@
 
 <body>
 	<input type="button" id="btn_login" value="Login" />
+	<input type="text" id="des">
 	<input type="text" id="result">
 </body>
 </html>

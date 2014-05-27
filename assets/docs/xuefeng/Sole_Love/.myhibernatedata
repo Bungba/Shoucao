@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Tue Mar 11 10:54:25 CST 2014
+#Mon Apr 21 15:43:27 CST 2014
 sessionFactoryName=com.model.HibernateSessionFactory
 genBasicCompId=false
 profile=

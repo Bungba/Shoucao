@@ -9,7 +9,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
+import javax.persistence.Entity;
 
+@Entity
 public class RandomNumUtil {
 	private ByteArrayInputStream image;// Í¼Ïñ
 	private String str;// ÑéÖ¤Âë

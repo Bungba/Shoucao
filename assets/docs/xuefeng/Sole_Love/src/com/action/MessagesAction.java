@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
@@ -37,11 +41,10 @@ public class MessagesAction {
 		if (user != null) {
 			List<Messages> list = messagesService.findMsgInfo(user.getId());
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			result=ja.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "[{\"message\":\"用户未登录\"}]";
 		return "success";
 	}
 
@@ -50,6 +53,8 @@ public class MessagesAction {
 	 * 
 	 * @return
 	 */
+	@Id
+	@GeneratedValue
 	int msgId;// 站内信ID
 
 	public String readMesInfo() {
@@ -59,11 +64,13 @@ public class MessagesAction {
 			List<Messages> list = messagesService.readMesInfo(user.getId(),
 					msgId);
 			JSONArray ja = JSONArray.fromObject(list);
-			result = ja.toString();
-			error = "{\"message\":\"无错误\"}";
+			StringBuffer sb=new StringBuffer();
+			sb.append(ja.toString());
+			sb.append("{\"message\":\"无错误\"}");
+			result=sb.toString();
 			return "success";
 		}
-		error = "{\"message\":\"用户未登录\"}";
+		result = "{\"message\":\"用户未登录\"}";
 		return "success";
 	}
 

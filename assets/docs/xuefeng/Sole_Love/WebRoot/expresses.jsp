@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
 				data = data.replace("[", "").replace("]", "");
 				data = data.replace("[", "").replace("]", "");
-				alert(data);
+				//alert(data);
 				var member = eval("(" + data + ")"); //包数据解析为json 格式    
 				$('#result').html(	member.name);
 			}, 'json' //数据传递的类型  json  

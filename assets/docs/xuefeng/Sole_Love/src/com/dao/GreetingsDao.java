@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 
+import javax.persistence.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,7 +47,7 @@ public class GreetingsDao{
 	}
 	
 	/**
-	 * 新建祝福
+	 * 用户新建祝福
 	 */
 	@Transactional
 	public List<Greetings> addGreetingInfo(int userid,String char_id,String bg_id,String sound){
@@ -74,5 +75,50 @@ public class GreetingsDao{
 			return null;
 		}
 		return null;
+	}
+	/**
+	 * 新建祝福
+	 */
+	@Transactional
+	public boolean addGreetingInfo(String char_id,String bg_id,String sound,String code){
+		Session session=sessionFactory.getCurrentSession();
+		Greetings g=new Greetings();
+		g.setBackground(bg_id);
+		g.setCharactor(char_id);
+		g.setSound(sound);
+		g.setCode(code);
+		g.setCreationtime(new Timestamp(System.currentTimeMillis()));
+		Serializable sb=session.save(g);
+		if (sb!=null) {
+			return true;
+		}
+		return false;
+	}
+	@Transactional
+	public boolean updateGreeting(int id,String char_id,String bg_id,String sound,String code){
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from Greetings where id=?");
+		query.setInteger(0, id);
+		Greetings g=(Greetings)query.uniqueResult();
+		g.setBackground(bg_id);
+		g.setCharactor(char_id);
+		g.setSound(sound);
+		g.setCode(code);
+		g.setUpdatetime(new Timestamp(System.currentTimeMillis()));
+		try {
+			session.update(g);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	@Transactional
+	public Greetings findGreetingInfo(int id){
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from Greetings where id=?");
+		query.setInteger(0, id);
+		Greetings g=(Greetings)query.uniqueResult();
+		return g;
 	}
 }

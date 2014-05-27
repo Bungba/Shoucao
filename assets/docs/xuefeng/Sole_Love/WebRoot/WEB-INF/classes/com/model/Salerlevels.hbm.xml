@@ -21,7 +21,7 @@
             </column>
         </property>
         <property name="saleroom" type="java.lang.Double">
-            <column name="saleroom" precision="12" scale="0">
+            <column name="saleroom" precision="22" scale="0">
                 <comment>达到此level所需的销售额</comment>
             </column>
         </property>

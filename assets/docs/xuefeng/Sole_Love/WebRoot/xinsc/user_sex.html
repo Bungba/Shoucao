@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>QQ</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/user_qq.css">
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/user_sex.js"></script>
+    <script type="text/javascript">
+    var sex;
+    	function nansex(){
+    		sex=0;
+    	}
+    	function nvsex(){
+    		sex=1;
+    	}
+    	$(document).ready(function() {
+		$("#sub_confirm").click(function() {
+			var url = 'wxUpdateUser.action';
+			var params = {
+				gender : sex,
+			}
+			$.post(url, //服务器要接受的url  
+			params, //传递的参数       
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				if(data){
+					alert("修改成功！")
+					setTimeout("window.location.href = 'user_details.html'",1500);
+				}else{
+					alert("修改失败")
+					setTimeout("window.location.href = 'petname.html'",1500);
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+		});
+	});
+    </script>
+</head>
+<body>
+<div class="big_title2">
+    <p class="title_p">性别</p>
+</div>
+    <div class="container">
+        <div class="nan" style="height: 1.5em" onclick="nansex()">
+            <div style="float: left;color: #c8c8c8" >男</div>
+            <div style="float: right"><img class="img1" style="width: 1.5em" src="images/gou_img.jpg"></div>
+        </div>
+        <div style="clear: both;border-bottom: 1px solid #e6e6e6;height: 0.5em;margin-bottom: 0.6em"></div>
+        <div class="nv" style="height: 1.5em" onclick="nvsex()">
+            <div style="float: left;color: #c8c8c8" >女</div>
+            <div style="float: right"><img class="img2" style="width: 1.5em;display: none" src="images/gou_img.jpg"></div>
+        </div>
+    </div>
+    <div style="margin-top: 1em;width: 100%;text-align: center"><input type="button" id="sub_confirm" value="保存"></div>
+</body>
+</html>

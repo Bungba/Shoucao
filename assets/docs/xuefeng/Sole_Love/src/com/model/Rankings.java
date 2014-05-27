@@ -11,7 +11,7 @@ public class Rankings implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
-	private Integer saleroom;
+	private Double saleroom;
 	private String name;
 	private String city;
 	private Timestamp updatetime;
@@ -24,7 +24,7 @@ public class Rankings implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Rankings(Integer saleroom, String name, String city,
+	public Rankings(Double saleroom, String name, String city,
 			Timestamp updatetime, Timestamp creationtime) {
 		this.saleroom = saleroom;
 		this.name = name;
@@ -43,11 +43,11 @@ public class Rankings implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getSaleroom() {
+	public Double getSaleroom() {
 		return this.saleroom;
 	}
 
-	public void setSaleroom(Integer saleroom) {
+	public void setSaleroom(Double saleroom) {
 		this.saleroom = saleroom;
 	}
 

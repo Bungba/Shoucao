@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>我的账号</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/shoucao_dashi.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				var url = 'findUserInfo.action';
+				$.post(url,  function cbf(data) {
+					var member = eval("(" + data + ")");
+					for ( var i = 0; i < member.length; i++) {
+						$("#nickname").html(member[i].nickname);
+					}
+				}, 'json' //数据传递的类型  json  
+				);
+			});
+</script>
+</head>
+<body class="body">
+<div>
+    <img src="images/account_top_bar_bg1.png" class="bg_img">
+    <div class="uname" id="nickname" style="color: black;">
+    </div>
+
+    <div class="div_bg">
+        <table class="table">
+            <tr><td><p class="table_first_margin_top">我的代码</p></td><td style="text-align: right;"><a href="code.html"><img src="images/button.jpg" class="table_first_margin_top"></a></td></tr>
+            <tr><td colspan="2"><hr></tr>
+            <tr><td>销售管理</td><td class="td_right"><a href="sales_manage.html"><img src="images/button.jpg"></a></td></tr>
+            <tr><td colspan="2"><hr></tr>
+            <tr><td>排行榜</td><td class="td_right"><a href="ranking.html"><img src="images/button.jpg"></a></td></tr>
+            <tr><td colspan="2"><hr></tr>
+            <tr><td>首草大使权益说明</td><td class="td_right"><a href="rights_and_interests.html"><img src="images/button.jpg"></a></td></tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

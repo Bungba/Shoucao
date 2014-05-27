@@ -1,0 +1,84 @@
+﻿<html>
+<head>
+    <title>购买记录</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/apply.css">
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+      <script type="text/javascript">
+    $(document).ready(function() {
+			var url = 'wxfindUserOrders.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				var member = eval("(" + data + ")");
+				var title="";
+				for(var i=0;i<member.length;i++){
+					title+=member[i][2]+"    ";
+				}
+				alert("产品名："+title);
+			}, 'json' //数据传递的类型  json  
+			);
+    });
+  </script>
+</head>
+<body>
+<div class="big_title">
+    <p class="title_p">购买记录</p>
+</div>
+<div class="bg">
+    <div class="container2">
+        <div class="contents2">
+            <div style="padding-right: 10px;padding-left: 10px">
+                <div style="width: 100%;height:73px">
+                    <div style="float: left"><img style="width: 70px;height: 71px" src="./images/tiepishihu.png"></div>
+                    <div style="float: right;width: 70%;padding-top: 0.5em">
+                        <div style="float: left;color: #868686;font-size: 16px">铁皮石斛超微纯粉</div>
+                        <div style="float: right;color: #f26c4f">¥2527.00</div>
+                        <div style="clear:both;text-align: right;color: #b7b7b7">×1</div>
+                    </div>
+                </div>
+                <hr style="margin-top: 15px;">
+                <div style="width: 100%;height:73px;">
+                    <div style="float: left"><img style="width: 70px;height: 71px" src="./images/tiepishihu.png"></div>
+                    <div style="float: right;width: 70%;padding-top: 0.5em">
+                        <div style="float: left;color: #868686;font-size: 16px">铁皮石斛超微纯粉</div>
+                        <div style="float: right;color: #f26c4f">¥2527.00</div>
+                        <div style="clear:both;text-align: right;color: #b7b7b7">×1</div>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </div>
+            <div style="background-color:#f7f7f7;color: #868686;width: 100%;height: 40px;font-size: 14px;line-height: 40px;margin-top: 20px;text-align: center;margin-bottom: 15px">
+                显示其余一件
+            </div>
+            <div style="padding-right: 10px;padding-left: 10px;padding-bottom: 1.1em">
+                <div style="width: 100%;height: 40px;line-height: 40px">
+                    <div style="float: left;color: #f26c4f">总价  ¥7581.00</div>
+                    <div style="float: right;color: #707070">数量&nbsp;&nbsp;3</div>
+                </div>
+                <div style="color:#acacac;line-height: 1.5">订单编号：201402211430<br>
+                    成交时间：2014-01-15 14:08:00</div>
+            </div>
+        </div>
+    </div>
+<br>
+    <div class="container3">
+        <div style="padding-right: 10px;padding-left: 10px;padding-top: 20px;padding-bottom: 20px">
+            <div style="width: 100%;height:73px;">
+                <div style="float: left"><img style="width: 70px;height: 71px" src="./images/tiepishihu.png"></div>
+                <div style="float: right;width: 70%;padding-top: 0.5em">
+                    <div style="float: left;color: #868686;font-size: 16px">铁皮石斛超微纯粉</div>
+                    <div style="float: right;color: #f26c4f">¥2527.00</div>
+                    <div style="clear:both;text-align: right;color: #b7b7b7">×1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

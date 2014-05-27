@@ -1,0 +1,171 @@
+<html>
+<head>
+    <title>确认订单</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/confirm_shop.css">
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/hidden.js"></script>
+    <script type="text/javascript" src="js/confirm_shop.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		$("#count").html($("#amount").val());
+    		
+			var url = 'addresses.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				var member = eval("(" + data + ")");
+				for(var i=0;i<member.length;i++){
+					$("#name").html(member[i].name);
+					$("#address").html(member[i].address);
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+	});
+	
+	$(document).ready(function() {
+    	var url = 'products.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				var membe = eval("(" + data + ")");
+				for(var i=0;i<membe.length;i++){
+					$("#ptitle").html(membe[i].title);
+					$("#pprice").html(membe[i].price);
+				}
+				$("#total").html($("#pprice").html());
+			}, 'json' //数据传递的类型  json  
+			);
+    });
+	
+	 $(document).ready(function() {
+    	var url = 'expresses.action';
+			$.post(url, //服务器要接受的url  
+			function cbf(data) { //服务器返回后执行的函数 参数 data保存的就是服务器发送到客户端的数据  
+				var member = eval("(" + data + ")");
+				for(var i=0;i<member.length;i++){
+					$("#expname").html(member[i].name);
+					$("#fee").html(member[i].fee);
+				}
+			}, 'json' //数据传递的类型  json  
+			);
+    });
+	 $(document).ready(function() {
+	 		
+			$("#zcount").html($("#amount").val());
+    	$("#m").click(function() {
+			$("#count").html($("#amount").val());
+			var count=$("#amount").val();
+			var price=$("#pprice").html();
+			$("#total").html(count*price);
+			$("#zcount").html(count);
+		});
+		$("#p").click(function() {
+			$("#count").html($("#amount").val());
+			var count=$("#amount").val();
+			var price=$("#pprice").html();
+			$("#total").html(count*price);
+			$("#zcount").html(count);
+		});
+    });
+    </script>
+</head>
+<body>
+<div hidden="hidden" class="mask"></div>
+<div hidden="hidden" class="mask_info">
+    <div style="margin: 0 auto;width: 92%">
+        <img src="images/confirm_shop.png" style="width: 100%">
+    </div>
+
+    <div class="content">
+        <div class="x" style="width: 1.5em"><img style="width: 1.5em" src="images/confirm_x.png"></div>
+            <div style="text-align: center;color: #ba936b;font-size: 1.5em"><p>恭喜您!</p></div>
+            <div  style="margin:0 auto;text-align: center"><p>由于你单笔消费已达<br><span class="orange">15000</span>分以上，<br>即日起您已成为首草特使!</p></div>
+            <div style="margin:0 auto;width: 70%;text-align: center"><p>可长期享受<span class="orange">23%</span>积分奖励权，即<span class="orange">7.7</span>折优惠!</p></div>
+            <div style="width:56%;margin:0 auto;text-align: center;font-size: 0.8em"><p>*请注意你用户名上的 T标记，
+                即代表你尊贵的首草特使身份！</p></div>
+        <div style="text-align: center"><input type="button" value="确定" class="confirm_btn"></div>
+    </div>
+</div>
+
+<div class="big_title">
+    <p class="title_p">确认订单</p>
+</div>
+<div style="background-color: #e9e9e9;height: 80px;width: 100%;">
+    <div style="float: left;margin-left: 6%;margin-top: 1em"><img style="width: 1.5em;height: 2em" src="images/order_from_history1.png"></div>
+    <div style="float: left;font-size: 14px;margin-left: 1em;line-height: 1.5em;color: #898989"><p><span style="font-size: 20px">收货人: <span id="name"></span></span><br>收货地址：<span id="address"></span></span></p></div>
+</div>
+
+<div class="bg">
+    <div class="container">
+        <div class="contents">
+            <div style="padding-right: 10px;padding-left: 10px">
+                <div style="width: 100%;height:73px">
+                    <div style="float: left"><img style="width: 70px;height: 71px" src="images/products1.png"></div>
+                    <div style="float: right;width: 70%">
+                        <div style="float: left;color: #868686;font-size: 16px" id="ptitle"></div>
+                        <div style="float: right;color: #f26c4f" >¥<span id="pprice"></span></div>
+                        <div style="clear:both;text-align: right;color: #b7b7b7">×<span id="count"></span></div>
+                    </div>
+                </div>
+                <hr style="margin-top: 15px;">
+                <div style="width: 100%;height:60px;line-height: 60px;">
+                    <div style="float: left"><span style="color: #868686">购买数量</span></div>
+                    <div style="float:right;height: 60px">
+                        <table style="height: 60px;line-height: 60px">
+                            <tr>
+                                <td><a href="javaScript:;" onclick="minus()" id="m"><img src="images/minus.png" style="width: 1.8em;height: 1.8em;"></a></td>
+                                <td><input class="btn2" value="1" id="amount" readonly="readonly" ></td>
+                                <td><a href="javaScript:;" onclick="plus()" id="p"><img src="images/plus.png" style="width: 1.8em;height: 1.8em;"></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr style="margin-top: 15px;">
+                <div style="width: 100%;height:60px;line-height: 60px;">
+                    <div style="float: left"><span style="color: #868686">配送方式</span></div>
+                    <div style="float:right;height: 60px">
+                        <div><span style="color: #868686"><span id="expname"></span></span>&nbsp;<span style="color: #f26c4f">¥<span id="fee"></span></span></div>
+                    </div>
+                </div>
+                <hr style="margin-top: 15px;">
+                <div style="width: 100%;height:80px;">
+                    <div style="float: left;margin-top: 20px;margin-bottom: 5px"><span style="color: #868686;font-size: 1em">输入首草大使代码</span></div>
+                    <div style="float:right;height: 2em;">
+                       <input style="float: left;color: #868686;width: 5em;height: 2em;margin-top: 12px" value="5XC2JOL">
+                        <div style="float: right;text-align: right;width: 4.5em;height:auto;margin-top: 10px"><input type="button" value="提交" class="sub_btn"></div>
+                    </div>
+                    <div style="clear:both;color: #f26c4f;font-size: 0.8em"><sup>*</sup>立享9折优惠</div>
+                </div>
+                <hr style="margin-top: 15px;">
+                <div style="width: 100%;height:80px;">
+                    <div style="float: left;margin-top: 18px;margin-bottom: 5px"><span style="color: #868686">输定制代码</span></div>
+                    <div style="float:right;height:2em">
+                        <input style="float: right;color: #868686;width: 6em;height: 2em;margin-top: 10px" value="SC00001">
+                    </div>
+                    <div style="clear:both;color: #f26c4f;font-size: 0.8em"><sup>*</sup>即可在产品包装加印二维码，<br>&nbsp;&nbsp;送出你献声的告爱定制</div>
+                </div>
+                <hr style="margin-top: 15px;">
+                <div style="width: 100%;height:60px;line-height: 60px;margin-bottom: 10px">
+                    <div style="float: left"><span style="color: #868686">你也可选择历史记录中的定制</span></div>
+                    <div style="float:right;height: 60px;">
+                        <a href="customized_record.html"><img style="margin-top: 10px" src="images/button.jpg"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container2" style="margin-top: 15px;margin-bottom: 15px;padding: 0">
+        <textarea cols="4" class="leave_word"> 给卖家留言</textarea>
+
+    </div>
+
+    <div style="background-color: #e9e9e9;height: 50px;width: 100%;text-align: center;border-top: 1px solid #dddddd;border-bottom: 1px solid #a6a6a6;">
+            <p><span style="color: #868686">共计<span id="zcount"></span>件商品，</span><span style="color: #f26c4f">¥<span id="total"></span></span></p>
+    </div>
+</div>
+<div style="margin-top:20px;text-align: center">
+    <input type="button" value="确定" id="sub_confirm">
+</div>
+<br>
+</body>
+</html>

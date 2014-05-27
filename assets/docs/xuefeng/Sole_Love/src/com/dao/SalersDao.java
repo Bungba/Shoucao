@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -87,7 +88,7 @@ public class SalersDao {
 			q.setInteger(0, userid);
 			Users u = (Users) q.uniqueResult();
 			Rankings r = new Rankings();
-			r.setSaleroom(0);
+			r.setSaleroom(0.0);
 			r.setName(u.getNickname());
 			r.setCity(u.getCity());
 			r.setCreationtime(new Timestamp(System.currentTimeMillis()));

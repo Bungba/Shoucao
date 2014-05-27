@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,7 +44,7 @@ public class UsersDao {
 			query = session.createQuery("from Blacklists where ip=?");
 			query.setString(0, ip);
 			Blacklists bk = (Blacklists) query.uniqueResult();
-			if (bk.getId() == null) {
+			if (bk == null) {
 				Blacklists b = new Blacklists();
 				b.setIp(ip);
 				b.setCount(0);
@@ -105,11 +106,11 @@ public class UsersDao {
 						.createQuery("from Users where email=? and password=? and locked=0 and delflag=0");
 				query.setString(0, email);
 				query.setString(1, password);
-				System.out.println("=================");
+				//System.out.println("=================");
 				return (Users) query.uniqueResult();
 			}
 		}
-		System.out.println("----------------");
+		//System.out.println("----------------");
 		return null;
 	}
 
@@ -222,13 +223,13 @@ public class UsersDao {
 			query = session.createQuery("from Users where mobile=?");
 			query.setString(0, mobile);
 			Users users = (Users) query.uniqueResult();
-			users.setDelFlag(1);
+			users.setDelflag(1);
 			session.update(users);
 		} else if (email != null) {
 			query = session.createQuery("from Users where email=?");
 			query.setString(0, email);
 			Users users = (Users) query.uniqueResult();
-			users.setDelFlag(1);
+			users.setDelflag(1);
 			session.update(users);
 		}
 	}

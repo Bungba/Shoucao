@@ -10,8 +10,8 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="saleroom" type="java.lang.Integer">
-            <column name="saleroom">
+        <property name="saleroom" type="java.lang.Double">
+            <column name="saleroom" precision="22" scale="0">
                 <comment>销售额</comment>
             </column>
         </property>

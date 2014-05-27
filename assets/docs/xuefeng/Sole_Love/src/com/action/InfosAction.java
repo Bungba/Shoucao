@@ -2,6 +2,8 @@ package com.action;
 
 import javax.annotation.Resource;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -28,10 +30,10 @@ public class InfosAction {
 	public String checkVerify() {
 		Infos infos = infosService.checkVerify(verify);
 		if (infos != null) {
-			result = "{\"message\":\"无错误\"}";
+			result = "[{\"message\":\"无错误\"}]";
 			return "success";
 		}
-		result = "{\"message\":\"优惠代码不存在\"}";
+		result = "[{\"message\":\"优惠代码不存在\"}]";
 		return "success";
 	}
 
